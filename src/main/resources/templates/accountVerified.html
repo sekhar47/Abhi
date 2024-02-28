@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="refresh" content="3;url=/login"> <!-- Redirect to login page after 3 seconds -->
+    <title>Congratulations!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        h3 {
+            color: #007bff;
+        }
+        .redirect-info {
+            font-size: 18px;
+            margin-top: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        .buffering {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: #007bff;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Congratulations! Your account has been activated and email is verified!</h3>
+        <p class="redirect-info">Redirecting to the login page in <span id="countdown">3</span> seconds<span class="buffering"></span></p>
+    </div>
+    <script>
+        // Countdown script
+        let seconds = 3;
+        setInterval(() => {
+            seconds--;
+            document.getElementById("countdown").innerText = seconds;
+            if (seconds === 0) {
+                clearInterval();
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

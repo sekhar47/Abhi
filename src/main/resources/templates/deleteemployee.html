@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Manage Employees</title>
+<style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ecf5ff; /* Lighter blue background */
+            margin: 20px;
+            color: #333; /* Dark text color */
+        }
+ 
+        h1 {
+            color: #007bff; /* Medium blue heading color */
+        }
+ 
+        form {
+            margin-top: 20px;
+        }
+ 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+ 
+        th, td {
+            border: 1px solid #aedcf9; /* Border color */
+            padding: 10px;
+            text-align: left;
+        }
+ 
+        th {
+            background-color: #007bff; /* Medium blue header background */
+            color: #fff; /* White text color */
+        }
+ 
+        tbody tr:nth-child(even) {
+            background-color: #cfe7ff; /* Light blue background for even rows */
+        }
+ 
+        tbody tr:nth-child(odd) {
+            background-color: #ecf5ff; /* Slightly lighter blue background for odd rows */
+        }
+ 
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+ 
+        button {
+            background-color: #007bff; /* Medium blue button color */
+            color: #fff; /* White text color */
+            padding: 10px;
+            margin-top: 20px;
+            margin-left: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+ 
+        button:hover {
+            background-color: #005cbf; /* Slightly darker blue on hover */
+        }
+ 
+        #error {
+            color: red;
+            margin-top: 10px;
+        }
+ 
+        /* Add space between button and table */
+        button + table {
+            margin-top: 20px;
+        }
+ 
+        /* Add space between "Delete Selected Employees" button and table */
+        button[type="button"] + table {
+            margin-top: 20px;
+        }
+</style>
+</head>
+<body>
+<h1>Manage Employees</h1>
+<form action="/delete-employees" method="post" id="deleteForm">
+<table>
+<thead>
+<tr>
+<th>Emp ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Role</th>
+<th>Designation</th>
+<th>Select</th>
+</tr>
+</thead>
+<tbody>
+<th:block th:each="user, rowStat : ${users}">
+<tr th:class="${rowStat.odd} ? 'odd' : 'even'">
+<td th:text="${user.empid}"></td>
+<td th:text="${user.name}"></td>
+<td th:text="${user.empemail}"></td>
+<td th:text="${user.privilage}"></td>
+<td th:text="${user.designation}"></td>
+<td>
+<input type="checkbox" name="empids" th:value="${user.empid}" 
+                                th:if="${user.privilage == 'USER'}" />
+<input type="checkbox" name="empids" th:value="${user.empid}" 
+                                th:if="${user.privilage == 'ADMIN'}" disabled />
+</td>
+</tr>
+</th:block>
+</tbody>
+</table>
+<button type="button" onclick="confirmDelete()">Delete Selected Employees</button>
+<div id="error"></div>
+</form>
+ 
+    <script>
+        function confirmDelete() {
+            var checkboxes = document.getElementsByName('empids');
+            var checked = Array.prototype.slice.call(checkboxes).some(function (checkbox) {
+                return checkbox.checked;
+            });
+ 
+            if (checked) {
+                var result = confirm("Are you sure you want to remove the selected employee(s)?");
+                if (result) {
+                    document.getElementById("deleteForm").submit();
+                }
+            } else {
+                document.getElementById("error").innerText = "Select at least one employee to delete.";
+                setTimeout(function () {
+                    document.getElementById("error").innerText = "";
+                }, 3500);
+            }
+        }
+</script>
+</body>
+</html>

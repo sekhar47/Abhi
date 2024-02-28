@@ -82,7 +82,6 @@ public class UserAccountController {
         }
     }
 
-
     @RequestMapping(value = "/confirm-account", method = { RequestMethod.GET, RequestMethod.POST })
     public String confirmUserAccount(Model model, @RequestParam("token") String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);

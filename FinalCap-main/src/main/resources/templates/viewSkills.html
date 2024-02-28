@@ -14,18 +14,13 @@
             margin: 20px;
             background-color: #f8f9fa; /* Light gray background */
         }
- 
-        h2, table, .success-message, .create-link-container {
-            opacity: 0;
-            animation: fadeIn 1s ease-in-out forwards;
-        }
- 
+
         h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #007bff; /* Bootstrap primary color */
+            color: rgb(0, 0, 64); /* Bootstrap primary color */
         }
- 
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -33,7 +28,6 @@
             background-color: #fff; /* White background */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
         }
- 
         th, td {
             padding: 12px;
             text-align: left;
@@ -41,19 +35,19 @@
         }
 
         th.title-row {
-            background-color: rgb(1, 157, 190); /* Light background for the title row */
+            background-color: cornflowerblue; /* Light background for the title row */
         }
- 
+
         .create-link-container {
             display: flex;
             justify-content: flex-end; /* Move buttons to the right */
+            align-items: center; /* Center align items vertically */
             margin-top: 10px;
         }
- 
+
         .create-link {
-            flex: 0 0 calc(20% - 10px); /* Adjust the width as needed */
-            padding: 8px;
-            background-color: #007bff;
+            padding: 10px 20px;
+            background-color: cornflowerblue;
             color: #fff;
             text-align: center;
             text-decoration: none;
@@ -61,20 +55,21 @@
             transition: background-color 0.3s ease, color 0.3s ease;
             font-weight: bold;
             margin-left: 10px; /* Add space between buttons */
-            display: none; /* Initially hide the buttons */
+            display: inline-block;
         }
- 
+
         .create-link:hover {
             background-color: #0056b3;
-            color: #fff;
+            color: white;
         }
- 
-        form {
-            margin-top: 20px;
+
+        .delete-button-container {
+            text-align: center; /* Center the button */
+            margin-top: 20px; /* Adjust margin as needed */
         }
- 
-        button {
-            padding: 8px 16px; /* Reduced size */
+
+        .delete-button {
+            padding: 10px 20px;
             background-color: #dc3545; /* Bootstrap danger color */
             color: #fff;
             border: none;
@@ -82,61 +77,35 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-weight: bold;
+            display: inline-block;
         }
- 
-        button:hover {
+
+        .delete-button:hover {
             background-color: #c82333; /* Darker red on hover */
         }
- 
+
         .success-message {
             color: #28a745; /* Bootstrap success color */
             margin-top: 10px;
             font-weight: bold;
         }
- 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
     </style>
- 
-    <script>
-        function confirmDelete() {
-            var checkboxes = document.querySelectorAll('input[name="skillsToDelete"]:checked');
-            if (checkboxes.length === 0) {
-                alert("Please select at least one skill to delete.");
-                return false;
-            }
-            var confirmation = confirm("Delete Skills Carefully. The associated data for employees will also be affected. Are you sure?");
-            return confirmation;
-        }
- 
-        function toggleCreateButtons() {
-            var createLinks = document.getElementsByClassName("create-link");
-            for (var i = 0; i < createLinks.length; i++) {
-                createLinks[i].style.display = createLinks[i].style.display === "none" ? "inline-block" : "none";
-            }
-        }
-    </script>
+
+    <!-- Include jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/admin-page'">Back</button>
-
     <h2>View Skills</h2>
- 
+
     <div class="create-link-container">
-        <button onclick="toggleCreateButtons()">Create</button>
         <a th:href="@{/createDomainPage}" class="create-link">Create Domain</a>
         <a th:href="@{/createSubdomainPage}" class="create-link">Create Subdomain</a>
         <a th:href="@{/createSkillPage}" class="create-link">Create Skill</a>
     </div>
- 
+
     <form th:action="@{/deleteSkills}" method="post" onsubmit="return confirmDelete()">
-        <table border="1">
+        <table class="table">
             <thead>
                 <tr>
                     <th class="title-row">Select</th>
@@ -156,16 +125,14 @@
                 </tr>
             </tbody>
         </table>
- 
-        <button type="submit">Delete Selected</button>
+
+        <div class="delete-button-container">
+            <button type="submit" class="delete-button">Delete Selected</button>
+        </div>
     </form>
- 
+
     <div th:if="${param.deleted}" class="success-message">
         <p>Delete successful! The associated data for employees has been affected.</p>
     </div>
- 
-    <!-- Include jQuery and Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

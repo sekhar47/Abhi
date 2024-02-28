@@ -1,0 +1,35 @@
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Skill</title>
+</head>
+<body>
+    <h2>Delete Skill</h2>
+    
+    <form th:action="@{/deleteSkill}" method="post">
+        <label for="domain">Select Domain:</label>
+        <select id="domain" name="domain">
+            <option th:each="domain : ${domains}" th:value="${domain}" th:text="${domain}"></option>
+        </select>
+        <br>
+        
+        <label for="subdomain">Select Subdomain:</label>
+        <select id="subdomain" name="subdomain">
+            <option th:each="subdomain : ${subdomains}" th:value="${subdomain}" th:text="${subdomain}"></option>
+        </select>
+        <br>
+        
+        <label for="skillName">Select Skill to Delete:</label>
+        <select id="skillName" name="skillName">
+            <option th:each="skill : ${skills}" th:value="${skill.skillname}" th:text="${skill.skillname}"></option>
+        </select>
+        <br>
+        
+        <input type="submit" value="Delete Skill">
+    </form>
+    
+    <a th:href="@{/viewSkillsPage}">Back to View Skills</a>
+</body>
+</html>
+-->

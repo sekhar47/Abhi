@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <!-- Your custom styles -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body {
+            /* background-color: #f8f9fa; */
+            background-image: url("css/img/NIr8Y2.jpg");
+        }
+ 
+        .container {
+            max-width: 400px;
+            margin: 100px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+ 
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+ 
+        .form-group {
+            margin-bottom: 20px;
+        }
+ 
+        label {
+            font-weight: bold;
+            color: #343a40;
+        }
+ 
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+ 
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+ 
+        input:focus {
+            border-color: #007bff;
+        }
+ 
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+ 
+        .register-link a {
+            color: #28a745;
+            text-decoration: none;
+        }
+ 
+        /* Adjusted styles for consistent input box formatting */
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+ 
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            width: 100%;
+        }
+ 
+        /* Styles for error message */
+        .error-message {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+            position: absolute;
+            top: 10px; /* Adjust top position */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center horizontally */
+            width: 30%; /* Reduce width */
+            animation: fadeOut 3s forwards; /* Fade out animation */
+        }
+ 
+        @keyframes fadeOut {
+            30% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                display: none; /* Hide after animation completes */
+            }
+        }
+    </style>
+</head>
+ 
+<body>
+    <!-- Error message outside the main container -->
+    <div th:if="${message != null}" class="error-message">
+        [[${message}]]
+    </div>
+ 
+    <div class="container">
+        <h2>Sign up</h2>
+        <form th:action="@{/registration}" method="post" role="form" th:object="${user}">
+            <div class="form-group">
+                <label for="empid">Employee ID</label>
+                <input th:field="*{empid}" type="text" id="empid" name="empid" class="form-control" required>
+            </div>
+ 
+            <div class="form-group">
+                <label for="name">Fullname</label>
+                <input th:field="*{name}" type="text" id="name" name="name" class="form-control" required>
+            </div>
+ 
+            <div class="form-group">
+                <label for="empemail">Email</label>
+                <input th:field="*{empemail}" type="text" id="empemail" name="empemail" class="form-control" required>
+            </div>
+ 
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input th:field="*{password}" type="password" id="password" name="password" class="form-control"
+                    required>
+            </div>
+            <input type="submit" value="Register" class="btn btn-primary">
+        </form>
+        <div class="register-link">
+            <p>Already have an account? <a href="/login">Login here</a></p>
+        </div>
+    </div>
+ 
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        // Function to hide the error message after 3 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                var alertDiv = document.querySelector('.error-message');
+                if (alertDiv) {
+                    alertDiv.style.display = 'none';
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+ 
+</html>
