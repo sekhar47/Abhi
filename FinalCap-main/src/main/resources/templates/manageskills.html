@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>User Skills</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #e6f7ff; /* Light blue background color */
+        }
+ 
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #004080; /* Dark blue text color */
+        }
+ 
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+ 
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+ 
+        button:hover {
+            background-color: #0056b3;
+        }
+ 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff; /* White background color for the table */
+        }
+ 
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+ 
+        th {
+            background-color: #004080; /* Dark blue header background color */
+            color: #fff;
+        }
+ 
+        tr:nth-child(even) {
+            background-color: #cce5ff; /* Light blue alternate row background color */
+        }
+ 
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 20px auto; /* Center the button */
+            display: block;
+        }
+ 
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+ 
+        .update-btn {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+ 
+        .update-btn:hover {
+            background-color: #218838;
+        }
+ 
+        #errorMessage {
+            color: red;
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+  
+    </style>
+    
+    
+</head>
+<body>
+<h1>User Skills</h1>
+ 
+<nav>
+    <button onclick="window.location.href='/user/add-skill'">Add Skill</button>
+    <button onclick="window.location.href='/user-page'">Dashboard</button>
+</nav>
+ 
+<form id="deleteForm" th:action="@{/user/delete-skills}" method="post">
+    <table border="1">
+        <tr>
+            <th>Select</th>
+            <th>Domain</th>
+            <th>Subdomain</th>
+            <th>Skill Name</th>
+            <th>Rating</th>
+            <th>Certification Name</th>
+            <th>Training Days</th>
+            <th>Reviewed</th>
+        </tr>
+        <tr th:each="skill : ${userSkills}">
+            <td>
+                <input type="checkbox" name="skillIds" th:value="${skill.skillid}"/>
+            </td>
+            <td th:text="${skill.domain}"></td>
+            <td th:text="${skill.subdomain}"></td>
+            <td th:text="${skill.skillname}"></td>
+            <td th:text="${skill.proficiency}"></td>
+            <td th:text="${skill.certificationname}"></td>
+            <td th:text="${skill.trainingdays}"></td>
+            <td th:text="${skill.reviewed ? 'Yes' : 'No'}"></td>
+
+            </tr>
+    </table>
+ 
+    <button class="delete-btn" type="button" onclick="confirmDelete()">Delete Selected</button>
+</form>
+ 
+<!-- Error message section -->
+<p id="errorMessage">Please select at least one skill to delete.</p>
+
+
+   
+<!-- JavaScript for Form Submission -->
+<script th:inline="javascript">
+    function confirmDelete() {
+        // Check if any checkbox is checked
+        var checkboxes = document.getElementsByName('skillIds');
+        var atLeastOneChecked = false;
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                atLeastOneChecked = true;
+                break;
+            }
+        }
+        
+        // If at least one checkbox is checked, ask for confirmation
+        if (atLeastOneChecked) {
+            if (confirm("Are you sure you want to delete selected skills?")) {
+                document.getElementById('deleteForm').submit();
+            }
+        } else {
+            // Show error message
+            document.getElementById('errorMessage').style.display = 'block';
+            // Hide error message after 3 seconds (3000 milliseconds)
+            setTimeout(function() {
+                document.getElementById('errorMessage').style.display = 'none';
+            }, 1500);
+        }
+    }
+</script>
+
+
+
+ 
+<script th:inline="javascript">
+  function updateSkill(skillId) {
+    // Check if skillId is defined and not null
+    if (skillId !== undefined && skillId !== null) {
+        // Redirect to the update page with the skillId parameter
+        window.location.href = '/user/update-skill?empid=' + skillId + '&skillid=' + skillId;
+    } else {
+        // Log an error or handle the case where skillId is not valid
+        console.error('Invalid skillId:', skillId);
+    }
+}
+</script>
+ 
+</body>
+</html>

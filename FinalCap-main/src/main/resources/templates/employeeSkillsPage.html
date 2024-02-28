@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Skill Details</title>
+       <link rel="icon" href="/img/MicrosoftTeams-image (1).png" type="image/x-icon">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ecf5ff; /* Lighter shade of blue */
+            margin: 20px;
+            color: #333; /* Dark text color */
+            text-align: center; /* Center align the content */
+        }
+ 
+        h1 {
+            color: #005cbf; /* Dark blue */
+        }
+ 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+ 
+        th, td {
+            border: 1px solid #aedcf9; /* Border color */
+            padding: 10px;
+            text-align: left;
+        }
+ 
+        th {
+            background-color: #007bff; /* Medium blue */
+            color: #fff; /* White text color */
+        }
+        td form {
+   			 display: inline-block;
+		}
+ 
+        td:nth-child(even) {
+            background-color: #f0f7ff; /* Lighter shade for even rows */
+        }
+ 
+        td:nth-child(odd) {
+            background-color: #e7f0fd; /* Light blue for odd rows */
+        }
+
+        .reviewed-yes {
+            color: green;
+        }
+
+        .reviewed-no {
+            color: red;
+        }
+ 
+        button {
+            background-color: #005cbf; /* Dark blue */
+            color: #fff; /* White text color */
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+ 
+        button:hover {
+            background-color: #004080; /* Slightly darker blue on hover */
+        }
+        
+        #searchForm {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        #searchInput {
+            height: 26px;
+            width: 250px; /* Adjust the width as needed */
+            margin-right: 5px;
+        }    
+    </style>
+</head>
+<body>
+    <button style="background-color: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/admin-page'">Back</button>
+
+    <!-- Body section -->
+    <h1>Employee Skill Details</h1>
+
+    <!-- Search bar -->
+    <form id="searchForm">
+        <input type="text" id="searchInput" placeholder="Search..." />
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Table section -->
+    <table border="1" id="employeeSkillsTable">
+        <thead>
+            <tr>
+                <th>Emp ID</th>
+                <th>Name</th>
+                <th>Skill Name</th>
+                <th>Subdomain</th>
+                <th>Domain</th>
+                <th>Reviewed</th>
+                <th>Proficiency</th>
+                <th>Action</th> <!-- Updated column for action -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterate through employee skills and display details -->
+            <tr th:each="employeeSkill : ${employeeSkills}">
+                <td th:text="${employeeSkill.user.empid}"></td>
+                <td th:text="${employeeSkill.user.name}"></td>
+                <td th:text="${employeeSkill.skills.skillname}"></td>
+                <td th:text="${employeeSkill.skills.subdomain}"></td>
+                <td th:text="${employeeSkill.skills.domain}"></td>
+                <!-- Apply conditional class based on the value of the "Reviewed" attribute -->
+                <td th:text="${employeeSkill.reviewed ? 'Yes' : 'No'}"
+                    th:class="${employeeSkill.reviewed ? 'reviewed-yes' : 'reviewed-no'}"></td>
+                <td th:text="${employeeSkill.proficiency}"></td>
+              <td>
+    <!-- Review and Reject buttons -->
+    <form action="/reviewSkill" method="post" th:if="${!employeeSkill.reviewed}">
+        <input type="hidden" name="empid" th:value="${employeeSkill.user.empid}" />
+        <input type="hidden" name="skillid" th:value="${employeeSkill.skills.skillid}" />
+        <input type="hidden" name="approved" value="true" />
+        <button type="submit">Approve</button>
+    </form>
+    <form action="/reviewSkill" method="post" th:if="${!employeeSkill.reviewed}">
+        <input type="hidden" name="empid" th:value="${employeeSkill.user.empid}" />
+        <input type="hidden" name="skillid" th:value="${employeeSkill.skills.skillid}" />
+        <input type="hidden" name="approved" value="false" />
+        <button type="submit">Reject</button>
+    </form>
+</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var query = document.getElementById('searchInput').value.toLowerCase();
+            var rows = document.getElementById('employeeSkillsTable').querySelectorAll('tbody tr');
+            rows.forEach(function(row) {
+                var empId = row.querySelector('td:nth-child(1)').textContent.trim().toLowerCase();
+                var name = row.querySelector('td:nth-child(2)').textContent.trim().toLowerCase();
+                var skillName = row.querySelector('td:nth-child(3)').textContent.trim().toLowerCase();
+                var subdomain = row.querySelector('td:nth-child(4)').textContent.trim().toLowerCase();
+                var domain = row.querySelector('td:nth-child(5)').textContent.trim().toLowerCase();
+                var reviewed = row.querySelector('td:nth-child(6)').textContent.trim().toLowerCase();
+                var proficiency = row.querySelector('td:nth-child(7)').textContent.trim().toLowerCase();
+
+                if (empId.includes(query) || name.includes(query) || skillName.includes(query) || subdomain.includes(query) || domain.includes(query) || reviewed.includes(query) || proficiency.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create/Update Subdomain</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #333; /* Dark gray text color */
+        }
+ 
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1e90ff; /* Dodger blue heading color */
+        }
+ 
+        form {
+            max-width: 400px;
+            margin: auto;
+            display: none;
+            background-color: #fff; /* White form background color */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+ 
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #1e90ff; /* Dodger blue label text color */
+        }
+ 
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #1e90ff; /* Dodger blue border color */
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+ 
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+ 
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+ 
+        a {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+        }
+ 
+        .error-message {
+            color: red;
+        }
+ 
+        .toggle-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+ 
+        .toggle-buttons button {
+            background-color: #1e90ff; /* Dodger blue button background color */
+            color: #fff; /* White button text color */
+            padding: 8px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+ 
+        .toggle-buttons button:hover {
+            background-color: #007acc; /* Darker Dodger blue on hover */
+        }
+    </style>
+</head>
+<body>
+	<button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/viewSkillsPage'">Back</button>
+
+    <h2>Create/Update Subdomain</h2>
+    
+    <!-- Toggle buttons to switch between forms -->
+    <div class="toggle-buttons">
+        <button id="showCreateButton" onclick="toggleForm('create')" style="display: none;">Create Subdomain</button>
+        <button id="showUpdateButton" onclick="toggleForm('update')">Update Subdomain</button>
+    </div>
+    
+    <!-- Form for creating a new subdomain -->
+    <form id="createSubdomainForm" th:action="@{/saveSubdomain}" method="post" style="display: block;">
+        <h3 id="createTitle">Create Subdomain</h3> <!-- Title for create subdomain form -->
+        <label for="domain">Select Domain:</label>
+        <select id="domain" name="domain">
+            <option th:each="domain : ${domains}" th:value="${domain}" th:text="${domain}"></option>
+        </select>
+        <br>
+        
+        <label for="subdomain">Subdomain:</label>
+        <input type="text" id="subdomain" name="subdomain" required>
+        <br>
+        
+        <input type="submit" value="Create Subdomain">
+    </form>
+    
+    <!-- Form for updating an existing subdomain -->
+    <form id="updateSubdomainForm" th:action="@{/updateSubdomain}" method="post">
+        <h3 id="updateTitle" style="display: none;">Update Subdomain</h3> <!-- Title for update subdomain form -->
+        <label for="updateDomain">Select Domain:</label>
+        <select id="updateDomain" name="domain">
+            <option th:each="domain : ${domains}" th:value="${domain}" th:text="${domain}"></option>
+        </select>
+        <br>
+        
+        <label for="existingSubdomain">Select Subdomain to Update:</label>
+        <select id="existingSubdomain" name="existingSubdomain">
+            <!-- Subdomains will be populated dynamically based on the selected domain using JavaScript -->
+        </select>
+        <br>
+ 
+        <label for="updatedSubdomain">Updated Subdomain:</label>
+        <input type="text" id="updatedSubdomain" name="updatedSubdomain" required>
+        <br>
+        
+        <input type="submit" value="Update Subdomain">
+    </form>
+ 
+    <!-- JavaScript to toggle between create and update forms -->
+    <script>
+        function toggleForm(formType) {
+            if (formType === 'create') {
+                document.getElementById('createSubdomainForm').style.display = 'block';
+                document.getElementById('createTitle').style.display = 'block';
+                document.getElementById('updateSubdomainForm').style.display = 'none';
+                document.getElementById('updateTitle').style.display = 'none';
+                document.getElementById('showCreateButton').style.display = 'none';
+                document.getElementById('showUpdateButton').style.display = 'inline-block';
+            } else if (formType === 'update') {
+                document.getElementById('createSubdomainForm').style.display = 'none';
+                document.getElementById('createTitle').style.display = 'none';
+                document.getElementById('updateSubdomainForm').style.display = 'block';
+                document.getElementById('updateTitle').style.display = 'block';
+                document.getElementById('showCreateButton').style.display = 'inline-block';
+                document.getElementById('showUpdateButton').style.display = 'none';
+            }
+        }
+    </script>
+ 
+    <!-- JavaScript to populate subdomains based on the selected domain -->
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get references to the domain and subdomain dropdowns
+        var updateDomainDropdown = document.getElementById('updateDomain');
+        var existingSubdomainDropdown = document.getElementById('existingSubdomain');
+
+        // Function to fetch and populate subdomains based on the selected domain
+        function populateSubdomains() {
+            // Clear existing options in the existing subdomain dropdown
+            existingSubdomainDropdown.innerHTML = '';
+
+            // Fetch subdomains for the selected domain from the server
+            fetch('/getSubdomains/' + updateDomainDropdown.value)
+                .then(response => response.json())
+                .then(data => {
+                    // Populate the existing subdomain dropdown with the fetched subdomains
+                    data.forEach(subdomain => {
+                        var option = document.createElement('option');
+                        option.text = subdomain;
+                        option.value = subdomain;
+                        existingSubdomainDropdown.add(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching subdomains:', error));
+        }
+
+        // Event listener for when the domain dropdown value changes
+        updateDomainDropdown.addEventListener('change', populateSubdomains);
+
+        // Trigger the event listener manually when the page loads
+        populateSubdomains();
+    });
+</script>
+
+</body>
+</html>
+ 

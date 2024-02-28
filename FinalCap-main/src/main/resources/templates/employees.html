@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <meta charset="UTF-8">
+       <link rel="icon" href="/img/MicrosoftTeams-image (1).png" type="image/x-icon">
+
+    <title>Employee Details</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/employees.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.4/xlsx.full.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        body {
+           
+            background-image: url(host.jpg);
+             
+        }
+ 
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(201, 193, 193, 0.1);
+            padding: 20px;
+            margin-top: 50px;
+        }
+ 
+        h2 {
+            color: #007bff;
+        }
+ 
+        .form-group {
+            margin-bottom: 15px;
+        }
+ 
+        #searchInput {
+            margin-bottom: 20px;
+        }
+ 
+        #employeeTable {
+            margin-top: 20px;
+        }
+ 
+        .btn-primary {
+            margin-top: 20px;
+        }
+ 
+        .btn-success {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+ 
+<body class="container">
+ 
+<button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/admin-page'">Back</button>
+ 
+    <h2 class="animate__animated animate__bounceInDown text-center">Employee Details</h2>
+ 
+    <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search"
+        class="animate__animated animate__fadeInDown form-control mb-3">
+ 
+ 
+
+ 
+    <form th:action="@{/admin/searchEmployees}" method="get"
+        class="animate__animated animate__fadeInUp row justify-content-center mb-3">
+        <div class="form-group col-md-3">
+            <label>Search by EmpID:</label>
+            <input type="text" name="empid" class="form-control" />
+        </div>
+ 
+        <div class="form-group col-md-3">
+            <label>Search by Skill Name:</label>
+            <input type="text" name="skillname" class="form-control" />
+        </div>
+ 
+        <div class="form-group col-md-3">
+            <label>Search by Domain:</label>
+            <input type="text" name="domain" class="form-control" />
+        </div>
+ 
+        <div class="form-group col-md-3">
+            <label>Search by Subdomain:</label>
+            <input type="text" name="subdomain" class="form-control" />
+        </div>
+ 
+        <div class="form-group col-md-3">
+            <label>Search by Rating:</label>
+            <input type="text" name="proficiency" class="form-control" />
+        </div>
+ 
+        <div class="col-md-3">
+            <button type="submit" class="animate__animated animate__fadeInRight btn btn-primary mt-2">Search</button>
+        </div>
+    </form>
+ 
+    <table border="1" id="employeeTable" class="animate__animated animate__fadeIn table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Skill Name</th>
+                <th>Domain</th>
+                <th>Subdomain</th>
+                <th>Rating</th>
+                <th>Availability</th>
+                <th>Reviewed</th>
+                <th>Training Days</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.empid}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.empemail}"></td>
+                <td th:text="${employee.empmobile}"></td>
+                <td th:text="${employee.skillname}"></td>
+                <td th:text="${employee.domain}"></td>
+                <td th:text="${employee.subdomain}"></td>
+                <td th:text="${employee.proficiency}"></td>
+                <td th:text="${employee.availability} ? 'Yes' : 'No'"></td>
+<td th:if="${employee.reviewed != null}" th:text="${employee.reviewed} ? 'Yes' : 'No'"></td>
+<td th:unless="${employee.reviewed != null}">Not Reviewed</td>                <td th:text="${employee.trainingdays}"></td>
+
+            </tr>
+        </tbody>
+    </table>
+ 
+    <div class="row justify-content-center">
+        <button onclick="downloadDetails()" class="animate__animated animate__fadeInLeft btn btn-success mt-3">Download
+            Details</button>
+    </div>
+ 
+    <script>
+		
+        function filterTable() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("employeeTable");
+            tr = table.getElementsByTagName("tr");
+ 
+            for (i = 0; i < tr.length; i++) {
+                var found = false;
+                for (j = 0; j < tr[i].cells.length; j++) {
+                    td = tr[i].getElementsByTagName("td")[j];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = found || i === 0 ? "" : "none";
+            }
+        }
+ 
+        function downloadDetails() {
+            var element = document.getElementById('employeeTable');
+            var rows = element.getElementsByTagName('tr');
+            var data = [];
+ 
+            // Get column headers
+            var headers = [];
+            for (var i = 0; i < rows[0].cells.length; i++) {
+                headers.push(rows[0].cells[i].textContent.trim());
+            }
+            data.push(headers);
+ 
+            // Get data rows
+            for (var i = 1; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName('td');
+                var rowData = [];
+                for (var j = 0; j < cells.length; j++) {
+                    rowData.push(cells[j].textContent.trim());
+                }
+                data.push(rowData);
+            }
+ 
+            // Create Excel file
+            var wb = XLSX.utils.book_new();
+            var ws = XLSX.utils.aoa_to_sheet(data);
+            XLSX.utils.book_append_sheet(wb, ws, "Employee Details");
+            XLSX.writeFile(wb, "employee_details.xlsx");
+        }
+        
+        function reviewSkill(empid, skillid) {
+        $.ajax({
+            type: "PUT",
+            url: "/review-skill", // Specify the endpoint URL for reviewing the skill
+            data: { "empid": empid, "skillid": skillid },
+            success: function(response) {
+                if (response.success) {
+                    alert("Skill reviewed successfully!");
+                    // Reload the page or update the reviewed column in the current row
+                } else {
+                    alert("Failed to review skill.");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                alert("An error occurred while processing your request.");
+            }
+        });
+    }
+    </script>
+
+
+
+ 
+</body>
+ 
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Template Main CSS File -->
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/img/MicrosoftTeams-image (1).png" type="image/x-icon">
+  <title>TalenTrack | Home</title>
+  
+   <link rel="icon" href="MicrosoftTeams-image (1).png" type="image/x-icon">
+  <title>TalenTrack | Home</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/css/animate.css" rel="stylesheet">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/bootstrap-icons.css" rel="stylesheet">
+  <link href="/css/boxicons.min.css" rel="stylesheet">
+  <link href="/css/glightbox.min.css" rel="stylesheet">
+  <link href="/css/swiper-bundle.min.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="/css/admin.css"/>
+
+
+  
+ 
+
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between" >
+
+      <div class="logo">
+        <h1><a href="index.html"></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <a class="navbar-brand" href="index.html">
+          <img src="/img/this.gif" alt="THIS" width="180" height="40" class="d-inline-block align-top">
+        </a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <!-- <li><a class="nav-link scrollto" href="#status">Status</a></li> -->
+          <!-- <li><a class="nav-link scrollto" href="profile.html">Profile</a></li> -->
+          
+          <span sec:authorize="isAuthenticated">
+          <li><a class="nav-link scrollto" th:href="@{/logout}">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <div class="carousel-item active" style="background-image: url(assets/img/hero-carousel/1.jpg)">
+            <div class="carousel-container">
+              <div class="container">
+                <img src="/img/TalenTrack.png" alt="logo" width="200">
+                <!-- <h2 class="animate__animated animate__fadeInDown">TalenTrack</h2> -->
+                <p class="animate__animated animate__fadeInUp">View Employee Details</p>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item" style="background-image: url(assets/img/hero-carousel/2.jpg)">
+            <div class="carousel-container">
+              <div class="container">
+                <img src="/img/TalenTrack.png" alt="logo" width="200">
+                <!-- <h2 class="animate__animated animate__fadeInDown">TalenTrack</h2> -->
+                <p class="animate__animated animate__fadeInUp">Generate Reports</p>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+         <div class="carousel-item" style="background-image: url(assets/img/hero-carousel/3.jpg)">
+            <div class="carousel-container">
+              <div class="container">
+                <img src="/img/TalenTrack.png" alt="logo" width="200">
+                <p class="animate__animated animate__fadeInUp">Manage Skills</p>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+        </div> 
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+</svg>        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+</svg>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <div id="about" class="about-area area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+              <h2>About TalenTrack</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- single-well start-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="well-left">
+              <div class="single-well">
+                <a href="#">
+                  <img src="/img/ski.jpg" alt="Skill Image">
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- single-well end-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="well-middle">
+              <div class="single-well">
+                <a href="#">
+                  <h4 class="sec-head">Admin Dashboard</h4>
+                </a>
+                <br>
+                <p>
+                  Welcome to the Admin Dashboard! Effortlessly search and filter employee data, ensuring quick access to relevant information. Generate insightful reports to analyze workforce trends. Dive into detailed employee profiles for a comprehensive view of their details. Streamline your administrative tasks with our intuitive modules. Elevate your management experience on this powerful dashboard.                </p>
+                <ul>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+</svg> View Employee Details
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+</svg> Generate Reports
+                  </li>
+                 
+                 <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+</svg> Manage Skills
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- End col-->
+        </div>
+      </div>
+    </div><!-- End About Section -->
+
+    <!-- ======= Services Section ======= -->
+    <div id="services" class="services-area area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline services-head text-center">
+              <h2>Services</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <!-- Start Left services -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" th:href="@{/admin/admin/employees}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
+  <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5"/>
+</svg>
+                  </a>
+                  <h4>Employee Details</h4>
+                  <p>
+                    View all the Employee details.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon"th:href="@{/viewSkillsPage}">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-front" viewBox="0 0 16 16">
+  <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2zm5 10v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2v5a2 2 0 0 1-2 2z"/>
+</svg>
+                  </a>
+                  <h4>Manage Skills</h4>
+                 <!--  <p>
+                    View Profile
+                  </p> -->
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- end col-md-4 -->
+            <div class=" about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" th:href="@{/admin/report/search}">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+  <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
+</svg>
+                  </a>
+                  <h4>Generate Reports
+</h4>
+                  <p>
+                    Search based on Employee ID, Generate and Download Reports.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            
+          </div>
+          <!-- End Left services -->
+          
+         
+    </div><!-- End Services Section -->
+
+   <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" th:href="@{/employeeSkills}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
+  <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5"/>
+</svg>
+                  </a>
+                  <h4>Skill Validation</h4>
+                  <p>
+                    validate skills
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+
+
+       <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" th:href="@{/manage-employees}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
+  <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5"/>
+</svg>
+                  </a>
+                  <h4>Manage Employees</h4>
+                 
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+
+
+    <!-- ======= Portfolio Section ======= -->
+    <div id="portfolio" class="portfolio-area area-padding fix">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+              <h2>Skills</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row wesome-project-1 fix">
+          <!-- Start Portfolio -page -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-app">Front End</li>
+              <li data-filter=".filter-card">Back End</li>
+              <li data-filter=".filter-web">Cloud</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row awesome-project-content portfolio-container">
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-app portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="#"><img src="data:image/jpeg;base64,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"/></a>
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a  href="/admin/searchEmployees?empid=&skillname=HTML&domain=&subdomain=&proficiency=">
+                      <h4>HTML</h4>
+                      <span>Front End</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-web">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="#"><img src="/img/bo.webp" alt="" /></a>
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a href="/admin/searchEmployees?empid=&skillname=AZURE&domain=&subdomain=&proficiency=">
+                      <h4>Azure</h4>
+                      <span>Cloud</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-card">
+            <div class="single-awesome-project">
+              <div class="awesome-img" >
+                <a href="#"><img src="https://th.bing.com/th/id/OIP.FHRowoyvhJH4JfqZ6xb3AQHaEo?w=265&h=180&c=7&r=0&o=5&pid=1.7" alt="" height="300" width="400" />
+</a>
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a  href="/admin/searchEmployees?empid=&skillname=JAVA&domain=&subdomain=&proficiency=">
+                      <h4>Java</h4>
+                      <span>Back End</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-web">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="#"><img src="/img/bo.webp" alt="" /></a>
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a href="/admin/searchEmployees?empid=&skillname=GCP&domain=&subdomain=&proficiency=">
+                      <h4>GCP</h4>
+                      <span>Cloud</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-app">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="#"><img src="/img/bo.webp" alt="" /></a>
+                <div class="add-actions text-center text-center">
+                  <div class="project-dec">
+                    <a href="/admin/searchEmployees?empid=&skillname=CSS&domain=&subdomain=&proficiency=">
+                      <h4>CSS</h4>
+                      <span>Front End</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-web">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="#"><img src="/img/bo.webp" alt="" /></a>
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a href="http://localhost:8580/admin/searchEmployees?empid=&skillname=AWS&domain=&subdomain=&proficiency=">
+                      <h4>AWS</h4>
+                      <span>Cloud</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+        </div>
+      </div>
+    </div><!-- End Portfolio Section -->
+
+    
+
+    
+
+    
+
+    <!-- ======= Suscribe Section ======= -->
+    <div class="suscribe-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs=12">
+            <div class="suscribe-text text-center">
+              <h3>Welcome to our Torry Harris Business Solutions</h3>
+              <a class="sus-btn" href="#">Get A quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Suscribe Section -->
+
+    
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+                  <h2>Torry Harris </h2>
+                </div>
+
+                <p>Enabling business transformation through integrated ecosystems and innovative solutions </p>
+                <div class="footer-icons">
+                 <ul>
+                    <li>
+                      <a href="https://www.facebook.com/TorryHarrisIntegrationSolutions/"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+</svg></a>
+                    </li>
+                    <li>
+                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+</svg></a>
+                    </li>
+                    <li>
+                       <a href="https://www.instagram.com/torryharrisintegrationsolution"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+</svg></a>
+                    </li>
+                    <li>
+                      <a href="https://www.linkedin.com/company/torry-harris-integration-solutions/"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+</svg></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>information</h4>
+                <p>
+                  Enabling business transformation through integrated ecosystems and innovative solutions
+                </p>
+                <div class="footer-contacts">
+                  <p><span>Tel:</span> +123 456 789</p>
+                  <p><span>Email:</span> contact@thbs.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Instagram</h4>
+                <div class="flicker-img">
+                  <a href="#"><img src="assets/img/portfolio/1.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/2.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/3.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/4.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/5.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/6.jpg" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-area-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="copyright text-center">
+              <p>
+                &copy; Copyright <strong>Torry Harris Business Solutions</strong>. All Rights Reserved
+              </p>
+            </div>
+            <div class="credits">
+              <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
+            -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
+</svg></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/glightbox.min.js"></script>
+  <script src="/js/isotope.pkgd.min.js"></script>
+  <script src="/js/swiper-bundle.min.js"></script>
+  <script src="/js/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+</body>
+
+</html>
+
