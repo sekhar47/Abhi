@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/report.css">
+    <title>Employee Report</title>
+   <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .employee-details {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .employee-details img {
+            margin-right: 20px;
+            border-radius: 50%;
+            max-width: 100%;
+        }
+
+        .employee-info {
+            font-size: 16px;
+        }
+
+        .employee-info span {
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: rgb(0, 0, 0);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .download-btn {
+            display: block;
+            width: 200px;
+            margin: 0 auto;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Wrap the content to include in the PDF in a separate container -->
+    <div id="pdf-content">
+        <h2>Employee Report</h2>
+
+        <div class="employee-details">
+            <!-- Replace 'path/to/your/image.jpg' with the actual path to your image -->
+            <img src="/css/img/download.jpg" alt="Employee Image" width="200">
+            <div class="employee-info" th:each="employee : ${employees}" th:if="${employeeStat.first}">
+                <!-- Employee details here -->
+                <span>EmpID: <span th:text="${employee.empid}"></span></span> <br>
+            <span>Name: <span th:text="${employee.name}"></span></span><br>
+            <span>Email: <span th:text="${employee.empemail}"></span></span><br>
+            <span>Mobile: <span th:text="${employee.empmobile}"></span></span><br>
+            <span>Availability: <span th:text="${employee.availability} ? 'Yes' : 'No'"></span></span><br>
+            </div>
+        </div>
+
+        <h3>Skill Details</h3>
+
+        <table border="1">
+            <thead>
+                <!-- Table headers here -->
+                 <tr>
+                <th>Domain</th>
+                <th>Subdomain</th>
+                <th>Skill Name</th>
+                <th>Rating</th>
+                <th>Reviewed</th>
+                <th>Training Days</th>
+            </tr>
+            </thead>
+            <tbody>
+                <!-- Table body with employee data here -->
+                 <!-- Loop through employees and display data -->
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.domain}"></td>
+                <td th:text="${employee.subdomain}"></td>
+                <td th:text="${employee.skillname}"></td>
+                <td th:text="${employee.proficiency}"></td>
+                <td th:text="${employee.reviewed} ? 'Yes' : 'No'"></td>
+                <td th:text="${employee.trainingdays}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- The button will trigger the downloadPDF() function -->
+    <button class="download-btn" onclick="downloadPDF()">Download Report</button>
+
+    <!-- Include html2pdf library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+    <!-- JavaScript function to download PDF -->
+    <script>
+        function downloadPDF() {
+            // Target the content to be converted to PDF
+            const content = document.getElementById('pdf-content');
+
+            // Set the options for the PDF generation
+            const opt = {
+                margin:       1,
+                filename:     'employee_report.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // Generate PDF from the content excluding the button
+            html2pdf().from(content).set(opt).save();
+        }
+    </script>
+</body>
+</html>

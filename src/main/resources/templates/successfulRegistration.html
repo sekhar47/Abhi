@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Success</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        center {
+            text-align: center;
+        }
+
+        span {
+            display: block;
+            font-size: 18px;
+            color: #333;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Add more styles as needed */
+    </style>
+</head>
+
+<body>
+    <center>
+        <span th:text="'A verification email has been sent to: ' + ${user.empemail}"></span>
+        <a href="/login">Login</a>
+    </center>
+</body>
+
+</html>

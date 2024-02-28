@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <!-- Include necessary CSS and JS files -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ecf0f5;
+            color: #34495e;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+ 
+        #page-container {
+            background-color: #fff;
+            width: 21cm;
+            max-width: 100%;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+ 
+        h1 {
+            color: #3498db;
+            text-align: center;
+        }
+ 
+        form {
+            max-width: 100%;
+        }
+ 
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #3498db;
+            font-weight: bold;
+        }
+ 
+        input,
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+ 
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+ 
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+ 
+<body>
+    <div id="page-container">
+        <h1>Edit Profile</h1>
+        
+           <form action="/uploadProfilePicture" method="post" enctype="multipart/form-data">
+        <label for="profilePicture">Profile Picture:</label>
+        <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+        <br>
+        <button type="submit">Upload</button>
+    </form>
+        
+        <form action="/updateProfile" method="post">
+            <div>
+                <label for="empmobile">Phone:</label>
+                <input type="text" id="empmobile" name="empmobile" th:value="${user.empid}" disabled>
+            </div>
+            <div>
+                <label for="empmobile">Name:</label>
+                <input type="text" id="empmobile" name="empmobile" th:value="${user.name}" disabled>
+            </div>
+            <div>
+                <label for="empmobile">Email:</label>
+                <input type="text" id="empmobile" name="empmobile" th:value="${user.empemail}" disabled>
+            </div>
+ 
+            <div>
+                <label for="designation">Designation:</label>
+                <input type="text" id="designation" name="designation" th:value="${user.designation}">
+            </div>
+ 
+            <div>
+                <label for="empmobile">Phone:</label>
+                <input type="text" id="empmobile" name="empmobile" th:value="${user.empmobile}">
+            </div>
+            <div>
+                <label for="availability">Availability:</label>
+                <select name="availability" id="availability">
+                    <option value="true" th:selected="${user.availability == true}">Available</option>
+                    <option value="false" th:selected="${user.availability == false}">In Project</option>
+                </select>
+            </div>
+ 
+            <br>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+ 
+</html>
+ 

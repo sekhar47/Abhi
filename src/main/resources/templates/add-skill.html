@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Skill</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+      
+            /*background-color: #007bff;*/
+            background-size: 50% 100vh;
+            background-repeat: no-repeat;
+            background-position: left;
+            color: #000000;
+         
+        }
+
+        .navbar {
+            border-radius: 1px;
+            background-color:#e6f7ff !important; 
+            padding: 1rem;
+            color: rgb(245, 245, 245);
+        }
+
+        .container {
+            max-width: 500px;
+            padding: 40px;
+            background-color: rgba(252, 252, 252, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 800px;
+            margin-top: -680px;
+            
+            background-color: #e6f7ff;
+
+            
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        select,
+        input[type="text"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #a7a6a6;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+       button {
+         font-family: Arial, sans-serif;
+         font-weight: bold;
+         color: white;
+         background-color: #000000;
+         padding: 0.5em 1em;
+         border: none;
+         border-radius: .6rem;
+         width: 80px;
+         position: absolute;
+         left: 47%;   
+       }
+       #sa{
+		   margin-left: 325px;
+	   }
+	   .navbar-nav li a{
+		   color: black !important;
+	   } 
+	   .navbar-brand{
+		   color: black !important;
+	   }
+	
+
+      
+
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgba(252, 252, 252, 0.5);">
+        <a class="navbar-brand" href="#"><b>ADD SKILL</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/manageskills"><b>Manage Skills</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user-page"><b>Dashboard</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login"><b>Logout</b></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="img1">
+<img src="https://img.freepik.com/free-vector/vector-collection-business-people_53876-17412.jpg?t=st=1709124541~exp=1709128141~hmac=1b51ebfb9306688ce9ce90c7b65fd6000482003e142f3af60833b12d886ccd29&w=740" style="width: 50%;" id="image1"/>
+</div>
+    <!-- Main Content -->
+    <div class="container">
+        <form th:action="@{/user/add-skill}" method="post" th:object="${skillDTO}">
+            <label for="domain">Domain:</label>
+            <select id="domain" name="domain" th:field="*{domain}">
+                <option th:each="domain : ${domains}" th:value="${domain}" th:text="${domain}"></option>
+            </select><br>
+
+            <label for="subdomain">Subdomain:</label>
+            <select id="subdomain" name="subdomain" th:field="*{subdomain}">
+                <option th:each="subdomain : ${subdomains}" th:value="${subdomain}" th:text="${subdomain}"></option>
+            </select><br>
+
+            <label for="skillname">Skill Name:</label>
+            <select id="skillname" name="skillname" th:field="*{skillname}">
+                <option th:each="skill : ${skills}" th:value="${skill}" th:text="${skill}"></option>
+            </select><br>
+
+            <label for="proficiency">Rating:</label>
+            <select id="proficiency" name="proficiency" th:field="*{proficiency}">
+                <option value="" disabled selected>Select One</option>
+                <option value="Awareness">Awareness</option>
+                <option value="Novice">Novice</option>
+                <option value="Proficiency">Professional</option>
+                <option value="Expert">Expert</option>
+            </select><br>
+
+            <label for="certificationname">Certification Name:</label>
+            <input type="text" id="certificationname" name="certificationname" th:field="*{certificationname}"><br>
+
+            <label for="trainingdays">Training Days:</label>
+            <input type="number" id="trainingdays" name="trainingdays" th:field="*{trainingdays}"><br>
+
+            <button type="submit" id ="sa">Save</button>
+        </form>
+    </div>
+
+    <!-- JavaScript dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript to populate dropdowns -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("domain").addEventListener("change", populateSubdomains);
+            document.getElementById("subdomain").addEventListener("change", populateSkills);
+            populateSubdomains();
+        });
+
+        function populateSubdomains() {
+            var selectedDomain = document.getElementById("domain").value;
+            fetch('/api/subdomains?domain=' + selectedDomain)
+                .then(response => response.json())
+                .then(data => {
+                    var subdomainDropdown = document.getElementById("subdomain");
+                    subdomainDropdown.innerHTML = "";
+                    data.forEach(subdomain => {
+                        var option = document.createElement("option");
+                        option.text = subdomain;
+                        option.value = subdomain;
+                        subdomainDropdown.add(option);
+                    });
+                    populateSkills();
+                })
+                .catch(error => console.error('Error fetching subdomains:', error));
+        }
+
+        function populateSkills() {
+            var selectedSubdomain = document.getElementById("subdomain").value;
+            fetch('/api/skills?subdomain=' + selectedSubdomain)
+                .then(response => response.json())
+                .then(data => {
+                    var skillDropdown = document.getElementById("skillname");
+                    skillDropdown.innerHTML = "";
+                    data.forEach(skill => {
+                        var option = document.createElement("option");
+                        option.text = skill;
+                        option.value = skill;
+                        skillDropdown.add(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching skills:', error));
+        }
+    </script>
+</body>
+
+</html>

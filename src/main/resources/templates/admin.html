@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Template Main CSS File -->
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/img/MicrosoftTeams-image (1).png" type="image/x-icon">
+  <title>TalenTrack | Home</title>
+  
+   <link rel="icon" href="MicrosoftTeams-image (1).png" type="image/x-icon">
+  <title>TalenTrack | Home</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/css/animate.css" rel="stylesheet">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/bootstrap-icons.css" rel="stylesheet">
+  <link href="/css/boxicons.min.css" rel="stylesheet">
+  <link href="/css/glightbox.min.css" rel="stylesheet">
+  <link href="/css/swiper-bundle.min.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="/css/admin.css"/>
+
+
+  
+ 
+
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between" >
+
+      <div class="logo">
+        <h1><a href="index.html"></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <a class="navbar-brand" href="index.html">
+          <img src="/img/this.gif" alt="THIS" width="180" height="40" class="d-inline-block align-top">
+        </a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <!-- <li><a class="nav-link scrollto" href="#status">Status</a></li> -->
+          <!-- <li><a class="nav-link scrollto" href="profile.html">Profile</a></li> -->
+          
+          <span sec:authorize="isAuthenticated">
+          <li><a class="nav-link scrollto" th:href="@{/logout}">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <div class="carousel-item active" style="background-image: url(css/img/ski.jpg); filter: brightness(150%);">
+            <div class="carousel-container">
+              <div class="container">
+                <img src="/img/TalenTrack.png" alt="logo" width="200">
+                <!-- <h2 class="animate__animated animate__fadeInDown">TalenTrack</h2> -->
+                <p class="animate__animated animate__fadeInUp">View Employee Details</p>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item" style="background-image: url(css/img/skil.jpg); filter: brightness(150%);">
+            <div class="carousel-container">
+              <div class="container">
+                <img src="/img/TalenTrack.png" alt="logo" width="200">
+                <!-- <h2 class="animate__animated animate__fadeInDown">TalenTrack</h2> -->
+                <p class="animate__animated animate__fadeInUp">Generate Reports</p>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+         <div class="carousel-item" style="background-image: url(css/img/skill.jpg); filter: brightness(150%);">
+            <div class="carousel-container">
+              <div class="container">
+                <img src="/img/TalenTrack.png" alt="logo" width="200">
+                <p class="animate__animated animate__fadeInUp">Manage Skills</p>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+        </div> 
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+</svg>        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+</svg>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <div id="about" class="about-area area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+              <h2>About TalenTrack</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- single-well start-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="well-left">
+              <div class="single-well">
+                <a href="#">
+                  <img src="/img/ski.jpg" alt="Skill Image">
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- single-well end-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="well-middle">
+              <div class="single-well">
+                <a href="#">
+                  <h4 class="sec-head">Admin Dashboard</h4>
+                </a>
+                <br>
+                <p>
+                  Welcome to the Admin Dashboard! Effortlessly search and filter employee data, ensuring quick access to relevant information. Generate insightful reports to analyze workforce trends. Dive into detailed employee profiles for a comprehensive view of their details. Streamline your administrative tasks with our intuitive modules. Elevate your management experience on this powerful dashboard.                </p>
+                <ul>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+</svg> View Employee Details
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+</svg> Generate Reports
+                  </li>
+                 
+                 <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+  <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+</svg> Manage Skills
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- End col-->
+        </div>
+      </div>
+    </div><!-- End About Section -->
+
+    <!-- ======= Services Section ======= -->
+    <div id="services" class="services-area area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline services-head text-center">
+              <h2>Services</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <!-- Start Left services -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" th:href="@{/admin/admin/employees}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
+  <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5"/>
+</svg>
+                  </a>
+                  <h4>Employee Details</h4>
+                  <p>
+                    View all the Employee details.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon"th:href="@{/viewSkillsPage}">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-front" viewBox="0 0 16 16">
+  <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2zm5 10v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2v5a2 2 0 0 1-2 2z"/>
+</svg>
+                  </a>
+                  <h4>Manage Skills</h4>
+                 <!--  <p>
+                    View Profile
+                  </p> -->
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- end col-md-4 -->
+            <div class=" about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" th:href="@{/admin/report/search}">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+  <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
+</svg>
+                  </a>
+                  <h4>Generate Reports
+</h4>
+                  <p>
+                    Search based on Employee ID, Generate and Download Reports.
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            
+          </div>
+          <!-- End Left services -->
+          
+         
+    </div><!-- End Services Section -->
+
+   <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" th:href="@{/employeeSkills}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
+  <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5"/>
+</svg>
+                  </a>
+                  <h4>Peer Validation</h4>
+                  <p>
+                    validate skills
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+
+
+       <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" th:href="@{/manage-employees}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
+  <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5"/>
+</svg>
+                  </a>
+                  <h4>Manage Employees</h4>
+                 
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+
+
+    <!-- ======= Portfolio Section ======= -->
+    <div id="portfolio" class="portfolio-area area-padding fix">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+              <h2>Skills</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row wesome-project-1 fix">
+          <!-- Start Portfolio -page -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-app">Front End</li>
+              <li data-filter=".filter-card">Back End</li>
+              <li data-filter=".filter-web">Cloud</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row awesome-project-content portfolio-container">
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-app portfolio-item">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="#"><img src="https://th.bing.com/th/id/OIP.4dQkxLm-cAndV-9OfVjjQwAAAA?rs=1&pid=ImgDetMain"/></a>
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a  href="/admin/searchEmployees?empid=&skillname=HTML&domain=&subdomain=&proficiency=">
+                      <h4>HTML</h4>
+                      <span>Front End</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-web">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="#"><img src="https://www.teamdevelopmentforsitecore.com/-/media/TDS/Images/Features/cloud.png?h=401&w=640&la=en&hash=5CC957C0691353F38FB2606BA57338E3A25AA5A2" alt="" /></a>
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a href="/admin/searchEmployees?empid=&skillname=AZURE&domain=&subdomain=&proficiency=">
+                      <h4>Azure</h4>
+                      <span>Cloud</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-card">
+            <div class="single-awesome-project">
+              <div class="awesome-img" >
+                <a href="#"><img src="https://download.logo.wine/logo/Java_(programming_language)/Java_(programming_language)-Logo.wine.png" alt="" height="300" width="400" />
+</a>
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a  href="/admin/searchEmployees?empid=&skillname=JAVA&domain=&subdomain=&proficiency=">
+                      <h4>Java</h4>
+                      <span>Back End</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-web">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="#"><img src="https://th.bing.com/th/id/R.85f966ae0555f3900f5db62f9a59610d?rik=CcQz9zEicB5fqQ&riu=http%3a%2f%2fwww.digitalspace.co.uk%2fwp-content%2fuploads%2f2021%2f06%2flogo-google-cloud.png&ehk=v%2bSdmP%2bMCgmoD8aBsMs%2bXCJG96e8uT7LviINoe3F7q8%3d&risl=&pid=ImgRaw&r=0" alt="" /></a>
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a href="/admin/searchEmployees?empid=&skillname=GCP&domain=&subdomain=&proficiency=">
+                      <h4>GCP</h4>
+                      <span>Cloud</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-app">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="#"><img src="https://th.bing.com/th/id/R.f462ea39ee7a688a9c46faa2d230907a?rik=gdVJOgOfym%2fv6Q&riu=http%3a%2f%2fwww.goldenapplewebdesign.com%2fwp-content%2fuploads%2f2011%2f07%2fcss3.jpg&ehk=XJePj%2bDwQf5elnrVTK24c%2fQvyJoDOV7RiybsjKJ7rso%3d&risl=&pid=ImgRaw&r=0" alt="" /></a>
+                <div class="add-actions text-center text-center">
+                  <div class="project-dec">
+                    <a href="/admin/searchEmployees?empid=&skillname=CSS&domain=&subdomain=&proficiency=">
+                      <h4>CSS</h4>
+                      <span>Front End</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+          <!-- portfolio-item start -->
+          <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-web">
+            <div class="single-awesome-project">
+              <div class="awesome-img">
+                <a href="#"><img src="https://www.igel.com/wp-content/uploads/2020/06/aws@2x.png" alt="" /></a>
+                <div class="add-actions text-center">
+                  <div class="project-dec">
+                    <a href="/admin/searchEmployees?empid=&skillname=AWS&domain=&subdomain=&proficiency=">
+                      <h4>AWS</h4>
+                      <span>Cloud</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- portfolio-item end -->
+
+        </div>
+      </div>
+    </div><!-- End Portfolio Section -->
+
+    
+
+    
+
+    
+
+    <!-- ======= Suscribe Section ======= -->
+    <div class="suscribe-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs=12">
+            <div class="suscribe-text text-center">
+              <h3>Welcome to our Torry Harris Business Solutions</h3>
+              <a class="sus-btn" href="#">Get A quote</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Suscribe Section -->
+
+    
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+                  <h2>Torry Harris </h2>
+                </div>
+
+                <p>Enabling business transformation through integrated ecosystems and innovative solutions </p>
+                <div class="footer-icons">
+                 <ul>
+                    <li>
+                      <a href="https://www.facebook.com/TorryHarrisIntegrationSolutions/"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+</svg></a>
+                    </li>
+                    <li>
+                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+</svg></a>
+                    </li>
+                    <li>
+                       <a href="https://www.instagram.com/torryharrisintegrationsolution"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+</svg></a>
+                    </li>
+                    <li>
+                      <a href="https://www.linkedin.com/company/torry-harris-integration-solutions/"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+</svg></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>information</h4>
+                <p>
+                  Enabling business transformation through integrated ecosystems and innovative solutions
+                </p>
+                <div class="footer-contacts">
+                  <p><span>Tel:</span> +123 456 789</p>
+                  <p><span>Email:</span> contact@thbs.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Instagram</h4>
+                <div class="flicker-img">
+                  <a href="#"><img src="assets/img/portfolio/1.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/2.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/3.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/4.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/5.jpg" alt=""></a>
+                  <a href="#"><img src="assets/img/portfolio/6.jpg" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-area-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="copyright text-center">
+              <p>
+                &copy; Copyright <strong>Torry Harris Business Solutions</strong>. All Rights Reserved
+              </p>
+            </div>
+            <div class="credits">
+              <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
+            -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
+</svg></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/glightbox.min.js"></script>
+  <script src="/js/isotope.pkgd.min.js"></script>
+  <script src="/js/swiper-bundle.min.js"></script>
+  <script src="/js/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+</body>
+
+</html>
+

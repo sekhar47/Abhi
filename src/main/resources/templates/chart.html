@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>User Skills - Charts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #e6f7ff; /* Light blue background color */
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #004080; /* Dark blue text color */
+        }
+ 
+        /* Styling for the charts */
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+ 
+        .chart-container canvas {
+            width: 300px !important;
+            height: 300px !important;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+ 
+        .chart-container canvas:hover {
+            transform: scale(1.1);
+        }
+ 
+        .line-chart {
+            width: 400px;
+            height: 400px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+ 
+        .line-chart:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+	<button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/user-page'">Back</button>
+
+    <h1>Your Skill Report</h1>
+    
+    <div class="chart-container">
+        <!-- Pie chart for proficiency level overview -->
+        <canvas id="proficiencyChart" width="300" height="300"></canvas>
+        
+        <!-- Pie chart for skills overview -->
+        <canvas id="skillsChart" width="300" height="300"></canvas>
+    </div>
+ 
+    <!-- Line chart for training days -->
+    <canvas id="trainingDaysChart" class="line-chart"></canvas>
+ 
+    <script th:inline="javascript">
+        // Function to generate the proficiency level pie chart
+        function generateProficiencyChart(expertSkills, proficiencySkills, awarenessSkills, noviceSkills) {
+            var ctx = document.getElementById('proficiencyChart').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Expert', 'Proficiency', 'Awareness', 'Novice'],
+                    datasets: [{
+                        label: 'Proficiency Level Overview',
+                        data: [expertSkills, proficiencySkills, awarenessSkills, noviceSkills],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)', // Red color for Expert
+                            'rgba(54, 162, 235, 0.2)', // Blue color for Proficiency
+                            'rgba(255, 206, 86, 0.2)', // Yellow color for Awareness
+                            'rgba(75, 192, 192, 0.2)', // Green color for Novice
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    // Add your chart options here if needed
+                }
+            });
+        }
+ 
+        var expertSkills = /*[[${expertSkills}]]*/ [];
+        var proficiencySkills = /*[[${proficiencySkills}]]*/ [];
+        var awarenessSkills = /*[[${awarenessSkills}]]*/ [];
+        var noviceSkills = /*[[${noviceSkills}]]*/ [];
+        // Call the function to generate the proficiency level pie chart
+        generateProficiencyChart(expertSkills, proficiencySkills, awarenessSkills, noviceSkills);
+    </script>
+ 
+    <script th:inline="javascript">
+        // Function to generate the pie chart
+        function generatePieChart(totalSkills, reviewedSkillsRatio) {
+            var ctx = document.getElementById('skillsChart').getContext('2d');
+            var remainingSkills = totalSkills - reviewedSkills;
+ 
+            var myPieChart = new Chart(ctx, {
+                type: 'doughnut', // Change chart type to doughnut for circular representation
+                data: {
+                    labels: ['Reviewed Skills', 'Remaining Skills'],
+                    datasets: [{
+                        label: 'Skills Overview',
+                        data: [reviewedSkills, remainingSkills], // Pass counts instead of percentages
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)', // Blue color for Reviewed Skills
+                            'rgba(255, 99, 132, 0.2)', // Red color for Remaining Skills
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    cutoutPercentage: 80, // Adjust the cutout percentage to leave space for the center text
+                    tooltips: {
+                        enabled: false
+                    },
+                    plugins: {
+                        datalabels: {
+                            display: false // Hide default labels
+                        }
+                    },
+                    // Custom center text
+                    centerText: {
+                        display: true,
+                        text: reviewedSkillsRatio, // Use reviewedSkillsRatio directly
+                        color: '#000',
+                        fontStyle: 'bold',
+                        fontFamily: "'Arial', sans-serif",
+                        fontSize: 20
+                    }
+                }
+            });
+        }
+ 
+        var totalSkills = /*[[${totalSkills}]]*/ [];
+        var reviewedSkillsRatio = /*[[${reviewedSkillsRatio}]]*/ []; // Add reviewedSkillsRatio variable
+        var reviewedSkills = /*[[${reviewedSkills}]]*/ [];
+ 
+        // Call the function to initially generate the pie chart
+        generatePieChart(totalSkills, reviewedSkillsRatio);
+    </script>
+ 
+    <script th:inline="javascript">
+        function generateTrainingDaysChart(skillNames, trainingDays) {
+            var ctx = document.getElementById('trainingDaysChart').getContext('2d');
+            var myLineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: skillNames,
+                    datasets: [{
+                        label: 'Training Days',
+                        data: trainingDays,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+ 
+        // Retrieve skill names and training days from the model
+        var skillNames = /*[[${skillNames}]]*/ [];
+        var trainingDays = /*[[${trainingDays}]]*/ [];
+ 
+        // Call the function to generate the line chart
+        generateTrainingDaysChart(skillNames, trainingDays);
+    </script>
+</body>
+</html>
+ 

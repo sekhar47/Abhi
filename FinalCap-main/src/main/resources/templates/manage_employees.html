@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Users</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(173, 216, 230, 0.5); /* Light blue with transparency */
+            background-image: url('img/random.jpg'); /* Replace with the actual URL or local path */
+            background-size: cover;
+            background-position: center;
+            color: rgb(0, 128, 255); /* Add text color for better visibility */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+ 
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+        }
+ 
+        a {
+            display: inline-block;
+            padding: 15px 20px; /* Adjust the padding values to change the button size */
+            margin: 10px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+ 
+        a:hover {
+            background-color: #2980b9;
+        }
+
+        .content {
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2>Manage Your Users Carefully</h2>
+        <p>Once you delete or change their privilege, you can't revert it back. It's important to ensure that you have selected the right users and actions before proceeding.</p>
+        <p>Deleting employees or changing their privilege can have significant consequences on your system and workflow. Make sure to double-check your decisions before confirming.</p>
+    </div>
+
+    <div class="button-container">
+        <a href="/deleteEmployees">Remove Employees</a>
+        <a href="/privilage">Update Privilege</a>
+    </div>
+</body>
+</html>

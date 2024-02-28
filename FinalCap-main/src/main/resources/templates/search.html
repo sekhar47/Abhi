@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <link rel="stylesheet" type="text/css" href="path/to/search-styles.css"> <!-- Add the path to your CSS file -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8; /* Set a light background color */
+            color: #333; /* Set default text color */
+            text-align: center;
+            margin: 50px;
+        }
+
+        h2 {
+            color: #333; /* Set text color for heading */
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 200px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #3498db; /* Set background color for the button */
+            color: #fff; /* Set text color for the button */
+            padding: 15px 30px; /* Adjust padding for better appearance */
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Change background color on hover */
+        }
+
+        .content {
+            margin-top: 30px;
+            color: #555; /* Set text color for content */
+        }
+    </style>
+</head>
+<body>
+    <h2>Search Employee</h2>
+    <form th:action="@{/admin/report/generate}" method="post">
+        <label for="empid">Enter EmpID:</label>
+        <input type="text" id="empid" name="empid">
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="content">
+        <p>This module allows you to search for employee information based on their EmpID.</p>
+        <p>Enter the EmpID in the field above and click the Search button to retrieve the information.</p>
+    </div>
+</body>
+</html>

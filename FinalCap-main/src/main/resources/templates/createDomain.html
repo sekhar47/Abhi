@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create/Update Domain</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-image: url(css/img/28368.jpg);
+            background-size: cover;
+            color: #fff;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000; /* Changed heading color to black */
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 10px;
+            background-color: #fff;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #toggleText {
+            position: relative;
+            top: 0px;
+            left: 50px;
+            right: 10px;
+            cursor: pointer;
+            color: #28a745;
+        }
+        .cont1 input{
+			margin-left: 110px;
+		}
+      
+      
+    </style>
+</head>
+<body>
+	<button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/viewSkillsPage'">Back</button>
+    <div class="container">
+        <h2>Create/Update Domain</h2>
+
+        <!-- Form for creating a new domain -->
+        <form id="createDomainForm" th:action="@{/saveDomain}" method="post" style="display: block;">
+            <label for="newDomain">New Domain:</label>
+            <input type="text" id="newDomain" name="domain" class="form-control" required>
+            <br>
+<div class="cont">
+	<input type="submit" value="Create Domain" class="btn btn-primary" >
+          <!--  <p id="toggleText" onclick="toggleForm()" style="color: #ffff;">Update Domain</p>-->
+            
+    <input type="submit" id="toggleText" value="Update Domain" class="btn btn-primary" onclick="toggleForm()" style= "color: white;">
+	
+</div>
+            
+            
+        </form>
+
+        <!-- Form for updating an existing domain -->
+        <form id="updateDomainForm" th:action="@{/updateDomain}" method="post" style="display: none;">
+            <label for="existingDomain">Existing Domain:</label>
+            <select id="existingDomain" name="existingDomain" th:if="${domains}" class="form-control">
+                <!-- Populate dropdown with existing domains -->
+                <option th:each="domain : ${domains}" th:value="${domain}" th:text="${domain}"></option>
+            </select>
+            <br>
+
+            <label for="updatedDomain">Updated Domain:</label>
+            <input type="text" id="updatedDomain" name="updatedDomain" class="form-control" required>
+            <br>
+<div class="cont1">
+            <input type="submit" value="Update Domain" class="btn btn-primary">
+</div>
+      
+        </form>
+
+        <!-- Toggle text inside the container -->
+       
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Toggle between create and update forms
+        function toggleForm() {
+            var createForm = document.getElementById('createDomainForm');
+            var updateForm = document.getElementById('updateDomainForm');
+
+            if (createForm.style.display === 'block') {
+                createForm.style.display = 'none';
+                updateForm.style.display = 'block';
+                document.getElementById('toggleText').innerText = 'Create Domain';
+            } else {
+                createForm.style.display = 'block';
+                updateForm.style.display = 'none';
+                document.getElementById('toggleText').innerText = 'Update Domain';
+            }
+        }
+    </script>
+</body>
+</html>
