@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+     <link rel="icon" href="/img/MicrosoftTeams-image (1).png" type="image/x-icon">
+
     <title>Add Skill</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <style>
@@ -148,7 +150,7 @@
             <input type="text" id="certificationname" name="certificationname" th:field="*{certificationname}"><br>
 
             <label for="trainingdays">Training Days:</label>
-            <input type="number" id="trainingdays" name="trainingdays" th:field="*{trainingdays}"><br>
+            <input type="number" id="trainingdays" name="trainingdays" th:field="*{trainingdays}" min="0"><br>
 
             <button type="submit" id ="sa">Save</button>
         </form>
