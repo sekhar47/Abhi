@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="/img/MicrosoftTeams-image (1).png" type="image/x-icon">
-
     <title>Registration Form</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -19,6 +17,13 @@
             background-image: url("css/img/NIr8Y2.jpg");
         }
  
+  .eye-icon {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
         .container {
             max-width: 400px;
             margin: 100px auto;
@@ -114,6 +119,17 @@
                 display: none; /* Hide after animation completes */
             }
         }
+         .password-error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 10px; /* Adjust top margin */
+            width: 100%;
+            animation: fadeOut 3s forwards; /* Fade out animation */
+        }
+    </style>
     </style>
 </head>
  
@@ -125,7 +141,7 @@
  
     <div class="container">
         <h2>Sign up</h2>
-        <form th:action="@{/registration}" method="post" role="form" th:object="${user}">
+        <form th:action="@{/registration}" method="post" role="form" th:object="${user}" onsubmit="return validatePassword()">
             <div class="form-group">
                 <label for="empid">Employee ID</label>
                 <input th:field="*{empid}" type="text" id="empid" name="empid" class="form-control" required>
@@ -141,11 +157,19 @@
                 <input th:field="*{empemail}" type="text" id="empemail" name="empemail" class="form-control" required>
             </div>
  
-            <div class="form-group">
+           <div class="form-group">
                 <label for="password">Password</label>
-                <input th:field="*{password}" type="password" id="password" name="password" class="form-control"
-                    required>
+                <div class="input-group">
+                    <input th:field="*{password}" type="password" id="password" name="password" class="form-control" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text eye-icon" onclick="togglePassword()">
+                            <i class="bx bxs-show"></i>
+                        </span>
+                    </div>
+                </div>
             </div>
+     <div id="password-error" class="password-error" style="display: none;"></div>
+
             <input type="submit" value="Register" class="btn btn-primary">
         </form>
         <div class="register-link">
@@ -174,6 +198,48 @@
             }, 5000);
         });
     </script>
+    
+    <script>
+        // Function to toggle the password visibility
+        function togglePassword() {
+            var passwordInput = document.getElementById('password');
+            var eyeIcon = document.querySelector('.eye-icon i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('bxs-show');
+                eyeIcon.classList.add('bxs-hide');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('bxs-hide');
+                eyeIcon.classList.add('bxs-show');
+            }
+        }
+    </script>
+<script>
+   // Function to validate the password
+function validatePassword() {
+    var passwordInput = document.getElementById('password');
+    var passwordError = document.getElementById('password-error');
+
+    // Reset error message properties
+    passwordError.style.display = 'none';
+    passwordError.innerHTML = '';
+
+    var password = passwordInput.value;
+    var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+    if (!regex.test(password)) {
+        passwordError.innerHTML = 'Password must be at least 6 characters and include at least one letter, one number, and one special character.';
+        passwordError.style.display = 'block';
+        return false; // Prevent form submission
+    } else {
+        return true; // Allow form submission
+    }
+}
+
+</script>
+
 </body>
  
 </html>
