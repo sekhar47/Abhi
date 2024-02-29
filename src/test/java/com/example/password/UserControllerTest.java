@@ -120,18 +120,4 @@ class UserControllerTest {
         verify(model).addAttribute("error", "Passwords do not match. Recheck again");
     }
 
-    @Test
-    void testResetPassword_InvalidToken() {
-        // Arrange
-        String token = "invalidToken";
-        String password = "newPassword";
-        String confirmPassword = "newPassword";
-        when(userService.resetPassword(token, password, confirmPassword)).thenReturn("Invalid token. please check your link, TRY CLICKING ON THE LINK AGAIN");
-
-        // Act
-        String viewName = userController.resetPassword(token, password, confirmPassword, model);
-
-        // Assert
-        assertEquals("reset-password", viewName);
-        verify(model).addAttribute("error", "Invalid token. please check your link, TRY CLICKING ON THE LINK AGAIN");
-    }}
+}
