@@ -2,25 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-     <link rel="icon" href="/img/MicrosoftTeams-image (1).png" type="image/x-icon">
-
     <title>View Skills</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+ 
     <style>
-        body {
+      body {
             font-family: 'Helvetica Neue', sans-serif;
             margin: 20px;
             background-color: #f8f9fa; /* Light gray background */
         }
-
+ 
         h2 {
             text-align: center;
             margin-bottom: 20px;
             color: rgb(0, 0, 64); /* Bootstrap primary color */
         }
-
+ 
         table {
             width: 100%;
             border-collapse: collapse;
@@ -28,24 +26,24 @@
             background-color: #fff; /* White background */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
         }
-
+ 
         th, td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #dee2e6; /* Bootstrap table border color */
         }
-
+ 
         th.title-row {
             background-color: cornflowerblue; /* Light background for the title row */
         }
-
+ 
         .create-link-container {
             display: flex;
             justify-content: flex-end; /* Move buttons to the right */
             align-items: center; /* Center align items vertically */
             margin-top: 10px;
         }
-
+ 
         .create-link {
             padding: 10px 20px;
             background-color: cornflowerblue;
@@ -58,17 +56,17 @@
             margin-left: 10px; /* Add space between buttons */
             display: inline-block;
         }
-
+ 
         .create-link:hover {
             background-color: #0056b3;
             color: white;
         }
-
+ 
         .delete-button-container {
             text-align: center; /* Center the button */
             margin-top: 20px; /* Adjust margin as needed */
         }
-
+ 
         .delete-button {
             padding: 10px 20px;
             background-color: #dc3545; /* Bootstrap danger color */
@@ -80,18 +78,23 @@
             font-weight: bold;
             display: inline-block;
         }
-
+ 
         .delete-button:hover {
             background-color: #c82333; /* Darker red on hover */
         }
-
+ 
         .success-message {
             color: #28a745; /* Bootstrap success color */
             margin-top: 10px;
             font-weight: bold;
         }
+        .error-message {
+            color: #dc3545; /* Bootstrap danger color */
+            margin-top: 10px;
+            font-weight: bold;
+        }
     </style>
-
+ 
     <!-- Include jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -99,14 +102,16 @@
 <body>
     <h2>VIEW SKILLS</h2>
     <button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/admin-page'">Back</button>
-
+ 
     <div class="create-link-container">
         <a th:href="@{/createDomainPage}" class="create-link">Create/Update Domain</a>
         <a th:href="@{/createSubdomainPage}" class="create-link">Create/Update Subdomain</a>
         <a th:href="@{/createSkillPage}" class="create-link">Create/Update Skill</a>
     </div>
-
+ 
     <form th:action="@{/deleteSkills}" method="post" onsubmit="return confirmDelete()">
+        <div id="error-message" class="error-message"></div>
+        
         <table class="table">
             <thead>
                 <tr>
@@ -120,21 +125,53 @@
             <tbody>
                 <tr th:each="skill : ${skills}">
                     <td><input type="checkbox" th:value="${skill.skillid}" name="skillsToDelete"></td>
-                    <td><span th:text="${skill.skillid}"></span></td>
-                    <td><span th:text="${skill.skillname}"></span></td>
-                    <td><span th:text="${skill.subdomain}"></span></td>
-                    <td><span th:text="${skill.domain}"></span></td>
+                    <td><span th:text="${skill.skillid}">Skill ID</span></td>
+                    <td><span th:text="${skill.skillname}">Skill Name</span></td>
+                    <td><span th:text="${skill.subdomain}">Subdomain</span></td>
+                    <td><span th:text="${skill.domain}">Domain</span></td>
                 </tr>
             </tbody>
         </table>
-
+ 
         <div class="delete-button-container">
             <button type="submit" class="delete-button">Delete Selected</button>
         </div>
     </form>
-
+ 
     <div th:if="${param.deleted}" class="success-message">
         <p>Delete successful! The associated data for employees has been affected.</p>
     </div>
+ 
+    <script>
+        function confirmDelete() {
+            var checkboxes = document.getElementsByName('skillsToDelete');
+            var isChecked = false;
+ 
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    isChecked = true;
+                    break;
+                }
+            }
+ 
+            if (isChecked) {
+                // Display confirmation dialog
+                var confirmed = confirm('Are you sure you want to delete? Associated employee skill details will be deleted.');
+                
+                if (!confirmed) {
+                    return false; // Prevent form submission
+                }
+            } else {
+                document.getElementById('error-message').innerHTML = 'Please select at least one skill to delete.';
+                setTimeout(function() {
+                    document.getElementById('error-message').innerHTML = ''; // Clear error message after 3 seconds
+                }, 3000);
+                return false; // Prevent form submission
+            }
+ 
+            return true; // Allow form submission
+        }
+    </script>
 </body>
 </html>
+ 
