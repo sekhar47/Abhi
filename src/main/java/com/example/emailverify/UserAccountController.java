@@ -102,7 +102,7 @@ public class UserAccountController {
 
             mailMessage.setText("To confirm your account, please click here : "
 
-                    + "http://localhost:8580/confirm-account?token=" + confirmationToken.getConfirmationToken());
+                    + "http://13.126.85.125:8580/confirm-account?token=" + confirmationToken.getConfirmationToken());
  
             emailService.sendEmail(mailMessage);
  
