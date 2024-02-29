@@ -5,5 +5,5 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn package
 WORKDIR /app/target
-EXPOSE 8190
+EXPOSE 8580
 CMD ["java", "-jar", "your-application.jar"]
