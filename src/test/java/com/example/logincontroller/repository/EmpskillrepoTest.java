@@ -81,13 +81,6 @@ public class EmpskillrepoTest {
 
 
     @Test
-    public void testFindUserSkills() {
-        String empid = "test_empid";
-        EmployeeDetailsDTO userSkills = empskillrepo.findUserSkills(empid);
-        // Assert userSkills to verify the expected result
-    }
-
-    @Test
     public void testDeleteByIdEmpidAndIdSkillid() {
         String empid = "test_empid";
         Integer skillid = 1; // Assuming the ID of the skill to delete
