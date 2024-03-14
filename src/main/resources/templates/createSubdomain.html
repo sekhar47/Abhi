@@ -105,8 +105,11 @@
 <body>
     <h2>Create/Update Subdomain</h2>
     <div class="cont2">    
-    <button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/viewSkillsPage'">Back</button>
-    <!-- Form for creating a new subdomain -->
+ <button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="goBack()">Back</button>
+ 
+
+
+   <!-- Form for creating a new subdomain -->
     <form id="createSubdomainForm" th:action="@{/saveSubdomain}" method="post" style="display: block;">
         <h3 id="createTitle"></h3> <!-- Title for create subdomain form -->
         <label for="domain">Select Domain:</label>
@@ -204,6 +207,19 @@
         populateSubdomains();
     });
 </script>
+<script>
+    function goBack() {
+        // Retrieve the data parameter from the current URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const dataParam = urlParams.get('data');
+
+        // Construct the URL for the search page with the data parameter
+        const searchPageUrl = '/viewSkillsPage?data=' + dataParam;
+
+        // Navigate to the search page with the same data parameter
+        window.location.href = searchPageUrl;
+    }
+</script> 
 
 </body>
 </html>

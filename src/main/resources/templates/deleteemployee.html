@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
  <link rel="icon" href="/img/MicrosoftTeams-image (1).png" type="image/x-icon">
 
-<title>Manage Employees</title>
+<title>Remove Employees</title>
 <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -121,25 +121,31 @@
 <div id="error"></div>
 </form>
  
-    <script>
-        function confirmDelete() {
-            var checkboxes = document.getElementsByName('empids');
-            var checked = Array.prototype.slice.call(checkboxes).some(function (checkbox) {
-                return checkbox.checked;
-            });
- 
-            if (checked) {
+  <script>
+    function confirmDelete() {
+        var checkboxes = document.getElementsByName('empids');
+        var checked = Array.prototype.slice.call(checkboxes).some(function (checkbox) {
+            return checkbox.checked;
+        });
+
+        if (checked) {
+            var userInput = prompt("To confirm deletion, please enter 'CONFIRM DELETE' in capital letters:");
+            if (userInput !== null && userInput.trim() === "CONFIRM DELETE") {
                 var result = confirm("Are you sure you want to remove the selected employee(s)?");
                 if (result) {
                     document.getElementById("deleteForm").submit();
                 }
             } else {
-                document.getElementById("error").innerText = "Select at least one employee to delete.";
-                setTimeout(function () {
-                    document.getElementById("error").innerText = "";
-                }, 3500);
+                alert("Please enter 'CONFIRM DELETE' in capital letters to proceed with the deletion.");
             }
+        } else {
+            document.getElementById("error").innerText = "Select at least one employee to delete.";
+            setTimeout(function () {
+                document.getElementById("error").innerText = "";
+            }, 3500);
         }
+    }
 </script>
+
 </body>
 </html>

@@ -76,7 +76,7 @@
     </style>
 </head>
 <body>
-			    <button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/admin/report/search'">Back</button>
+<button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="goBack()">Back</button>
 <br>
     <!-- Wrap the content to include in the PDF in a separate container -->
     <div id="pdf-content">
@@ -104,7 +104,7 @@
                 <th>Domain</th>
                 <th>Subdomain</th>
                 <th>Skill Name</th>
-                <th>Rating</th>
+                <th>Proficiency</th>
                 <th>Reviewed</th>
                 <th>Training Days</th>
             </tr>
@@ -149,5 +149,20 @@
             html2pdf().from(content).set(opt).save();
         }
     </script>
+  <script>
+    function goBack() {
+        // Retrieve the data parameter from the current URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const dataParam = urlParams.get('data');
+
+        // Construct the URL for the search page with the data parameter
+        const searchPageUrl = '/admin/report/search?data=' + dataParam;
+
+        // Navigate to the search page with the same data parameter
+        window.location.href = searchPageUrl;
+    }
+</script>
+
+
 </body>
 </html>

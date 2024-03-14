@@ -77,18 +77,36 @@
             width: 250px; /* Adjust the width as needed */
             margin-right: 5px;
         }    
+        
+        .back-button {
+            background-color: #005cbf; /* Dark blue */
+            color: #fff; /* White text color */
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            left:15px;
+            transition: all 0.3s ease; /* Add transition for smooth size change */
+        }
+
+       
     </style>
 </head>
 <body>
-    <button style="background-color: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/admin-page'">Back</button>
+<!--    <button style="background-color: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" id="backButton">Back</button>
+-->
 
+
+    <!-- Second back button -->
+    
     <!-- Body section -->
     <h1>Employee Skill Details</h1>
 
     <!-- Search bar -->
     <form id="searchForm">
         <input type="text" id="searchInput" placeholder="Search..." />
-        <button type="submit">Search</button>
+        <button class="search1" type="submit">Search</button>
     </form>
 
     <!-- Table section -->
@@ -120,23 +138,32 @@
               <td>
     <!-- Review and Reject buttons -->
     <form action="/reviewSkill" method="post" th:if="${!employeeSkill.reviewed}">
-        <input type="hidden" name="empid" th:value="${employeeSkill.user.empid}" />
-        <input type="hidden" name="skillid" th:value="${employeeSkill.skills.skillid}" />
-        <input type="hidden" name="approved" value="true" />
-        <button type="submit">Approve</button>
-    </form>
-    <form action="/reviewSkill" method="post" th:if="${!employeeSkill.reviewed}">
-        <input type="hidden" name="empid" th:value="${employeeSkill.user.empid}" />
-        <input type="hidden" name="skillid" th:value="${employeeSkill.skills.skillid}" />
-        <input type="hidden" name="approved" value="false" />
-        <button type="submit">Reject</button>
-    </form>
+                        <input type="hidden" name="empid" th:value="${employeeSkill.user.empid}" />
+                        <input type="hidden" name="skillid" th:value="${employeeSkill.skills.skillid}" />
+                        <input type="hidden" name="approved" value="true" />
+                        <button type="button" onclick="confirmAction(this.form, 'Approve')">Approve</button>
+                    </form>
+                    <form action="/reviewSkill" method="post" th:if="${!employeeSkill.reviewed}">
+                        <input type="hidden" name="empid" th:value="${employeeSkill.user.empid}" />
+                        <input type="hidden" name="skillid" th:value="${employeeSkill.skills.skillid}" />
+                        <input type="hidden" name="approved" value="false" />
+                        <button type="button" onclick="confirmAction(this.form, 'Reject')">Reject</button>
+                    </form>
 </td>
 
             </tr>
         </tbody>
     </table>
-
+ <script>
+        // Function to confirm action before submitting form
+        function confirmAction(form, action) {
+            var confirmationMessage = "Are you sure you want to " + action.toLowerCase() + " this skill?";
+            var confirmed = confirm(confirmationMessage);
+            if (confirmed) {
+                form.submit();
+            }
+        }
+    </script>
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -159,5 +186,55 @@
             });
         });
     </script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <script>
+	$(document).ready(function() {
+    // Get the value of the 'data' parameter from the URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var dataParam = urlParams.get('data');
+    
+    // Create back button and set redirection based on dataParam
+    var backButton = $('<button class="back-button">Back</button>');
+    backButton.on('click', function() {
+        if (dataParam === 'ADMIN') {
+            window.location.href = '/admin-page?data=ADMIN'; // Append data parameter
+        } else if (dataParam === 'SADMIN') {
+            window.location.href = '/superadmin-page?data=SADMIN'; // Append data parameter
+        } else {
+            // Handle other cases or set a default redirection
+            window.location.href = '/';
+        }
+    });
+    
+    // Append back button to the page
+    $('body').append(backButton);
+
+    // Review and Reject buttons
+    $('form').on('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+        var form = $(this);
+        var formData = form.serialize(); // Serialize form data to send via AJAX
+
+        // AJAX request to reviewSkill endpoint
+        $.ajax({
+            url: form.attr('action'),
+            type: form.attr('method'),
+            data: formData,
+            success: function(response) {
+                // Redirect to employeeSkills page with 'data' parameter appended
+                window.location.href = '/employeeSkills?data=' + dataParam;
+            },
+            error: function(xhr, status, error) {
+                // Handle error if needed
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
+	</script>
+   
+   
 </body>
 </html>

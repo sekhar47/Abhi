@@ -23,14 +23,18 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String empid) throws UsernameNotFoundException {
         User user = userRepository.findByEmpid(empid);
+        
+     
+        
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
         
-        if (!user.isEnabled()) {
+        if (!user.isEnable()) {
             throw new UsernameNotFoundException("User is not enabled");
         }
         
+  
         return new org.springframework.security.core.userdetails.User(
             user.getEmpid(), 
             user.getPassword(), 

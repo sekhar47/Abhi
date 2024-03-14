@@ -11,7 +11,7 @@ public class TaskSchedulerConfig {
     @Bean
     public TaskScheduler taskScheduler() {
         ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
-        taskScheduler.setPoolSize(1000); // Set the desired pool size
+        taskScheduler.setPoolSize(3000); // Set the desired pool size
         return taskScheduler;
     }
 }

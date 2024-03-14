@@ -7,5 +7,13 @@ public interface UserService {
 	
 	User save(UserDto userDto);
 	
+	public void increaseFailedAttempt(User user);
+	
+	public void resetAttempt(String empemail);
+	
+	public void lock(User user);
+	
+	public boolean unlockAccountTimeExpired(User user);
+	
 
 }

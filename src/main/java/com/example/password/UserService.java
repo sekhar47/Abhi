@@ -30,7 +30,9 @@ public class UserService {
 
     public String forgotPassword(String email) {
         Optional<User> userOptional = Optional.ofNullable(userRepository.findByEmpemail(email));
+        
 
+        
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             String token = generateToken();

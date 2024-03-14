@@ -137,14 +137,17 @@
                 <option th:each="skill : ${skills}" th:value="${skill}" th:text="${skill}"></option>
             </select><br>
 
-            <label for="proficiency">Rating:</label>
-            <select id="proficiency" name="proficiency" th:field="*{proficiency}">
-                <option value="" disabled selected>Select One</option>
-                <option value="Awareness">Awareness</option>
-                <option value="Novice">Novice</option>
-                <option value="Proficiency">Professional</option>
-                <option value="Expert">Expert</option>
-            </select><br>
+<label for="proficiency">Proficiency:</label>
+<select id="proficiency" name="proficiency" th:field="*{proficiency}" onchange="displayDescription()">
+    <option value="" disabled selected>Select One</option>
+    <option value="Awareness">Awareness</option>
+    <option value="Novice">Novice</option>
+    <option value="Professional">Professional</option>
+    <option value="Expert">Expert</option>
+</select><br>
+
+<div id="description"></div>
+
 
             <label for="certificationname">Certification Name:</label>
             <input type="text" id="certificationname" name="certificationname" th:field="*{certificationname}"><br>
@@ -203,7 +206,35 @@
                 })
                 .catch(error => console.error('Error fetching skills:', error));
         }
+        
+        function displayDescription() {
+    var selectedProficiency = document.getElementById("proficiency").value;
+    var descriptionDiv = document.getElementById("description");
+    var descriptionText = "";
+
+    switch (selectedProficiency) {
+        case "Awareness":
+            descriptionText = "Have a basic knowledge and understanding of the topic, but haven’t yet applied the skill at work.";
+            break;
+        case "Novice":
+            descriptionText = "Have applied the skill at work, but still needs support.";
+            break;
+        case "Professional":
+            descriptionText = "Have experience of utilizing the skill and can work independently. Solves problems proactively. Can guide and support junior people performing related tasks.";
+            break;
+        case "Expert":
+            descriptionText = "Has a lot of experience in applying the skill in practice. Understands the bigger picture. Can discuss details with the client and advise the clients. Follows the trends and shares knowledge with colleagues.";
+            break;
+        default:
+            descriptionText = "";
+            break;
+    }
+
+    descriptionDiv.innerText = descriptionText;
+}
+
     </script>
+    
 </body>
 
 </html>

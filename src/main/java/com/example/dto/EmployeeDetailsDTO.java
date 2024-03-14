@@ -174,6 +174,5 @@ public class EmployeeDetailsDTO {
 	
 	
 
-    // Constructors, getters, and setters
     
 }

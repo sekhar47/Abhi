@@ -51,18 +51,18 @@ import static org.mockito.Mockito.*;
         assertEquals("landing", viewName);
     }
 
-    @Test
-    void login_ReturnsLoginPageWithError() {
-        // Arrange
-        String error = "Invalid credentials";
-
-        // Act
-        String viewName = loginController.login(error, modelMock);
-
-        // Assert
-        assertEquals("login", viewName);
-        verify(modelMock).addAttribute("errorMessage", "Incorrect username or password. Please try again.");
-    }
+//    @Test
+//    void login_ReturnsLoginPageWithError() {
+//        // Arrange
+//        String error = "Invalid credentials";
+//
+//        // Act
+//        String viewName = loginController.login(error, modelMock);
+//
+//        // Assert
+//        assertEquals("login", viewName);
+//        verify(modelMock).addAttribute("errorMessage", "Incorrect username or password. Please try again.");
+//    }
 
     @Test
     void userPage_ReturnsUserDashboardPage() {

@@ -119,25 +119,13 @@ public class SkillService {
     }
 
     
-//    public List<String> getSubdomainsByDomain(String domain) {
-//        // Implement logic to retrieve subdomains based on the selected domain from the database
-//        return repository.findDistinctSubdomainsByDomain(domain);
-//    }
 
     public List<String> getSkillNamesBySubdomain(String subdomain) {
         // Implement logic to retrieve skill names based on the selected subdomain from the database
         return repository.findSkillNamesBySubdomain(subdomain);
     }
 
-//    public void updateSkillName(String domain, String subdomain, String oldSkillName, String newSkillName) {
-//        // Implement logic to update skill name in the database
-//        Skills skill = (Skills) repository.findByDomainAndSubdomainAndSkillname(domain, subdomain, oldSkillName);
-//        if (skill != null) {
-//            skill.setSkillname(newSkillName);
-//            repository.save(skill);
-//        }
-//    }
-    
+ 
     
     public String deleteSkill(int skillid) {
         repository.deleteById(skillid);
@@ -153,9 +141,7 @@ public class SkillService {
 //   updatedomain
     @Transactional
     public void updateDomain(String existingDomain, String updatedDomain) {
-        // Perform any necessary validation or business logic
-        
-        // Update the domain
+     
     	repository.updateDomain(existingDomain, updatedDomain);
     }
     

@@ -13,5 +13,7 @@ public interface Manageempservice {
     void updateUserPrivilege(String empid, String privilege);
 	User getUserByEmpid(String empid);
     void updatePrivilege(String empid);
+	void revokePrivilege(String empid);
+	void promoteToSAdmin(String empid);
 
 }

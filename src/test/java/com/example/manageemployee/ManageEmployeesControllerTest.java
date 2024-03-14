@@ -104,7 +104,7 @@ public class ManageEmployeesControllerTest {
         when(manageempServiceMock.getAllUsers()).thenReturn(expectedEmployees);
 
         // Act
-        String viewName = manageEmployeesController.getAllEmployees(modelMock);
+        String viewName = manageEmployeesController.getAllEmployees(modelMock, null);
 
         // Assert
         assertEquals("privilage", viewName);

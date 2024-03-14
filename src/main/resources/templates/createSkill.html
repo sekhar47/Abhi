@@ -110,8 +110,11 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-	<button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/viewSkillsPage'">Back</button>
-    <h2>Create/Update Skill</h2> <!-- Title -->
+ <button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="goBack()">Back</button>
+ 
+
+
+   <h2>Create/Update Skill</h2> <!-- Title -->
  
     
 <div class="container">
@@ -274,5 +277,18 @@
     });
             /*]]>*/
         </script>
+        <script>
+    function goBack() {
+        // Retrieve the data parameter from the current URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const dataParam = urlParams.get('data');
+
+        // Construct the URL for the search page with the data parameter
+        const searchPageUrl = '/viewSkillsPage?data=' + dataParam;
+
+        // Navigate to the search page with the same data parameter
+        window.location.href = searchPageUrl;
+    }
+</script> 
 </body>
 </html>

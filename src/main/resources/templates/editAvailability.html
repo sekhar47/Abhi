@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
   <link rel="icon" href="/img/MicrosoftTeams-image (1).png" type="image/x-icon">
-
+ 
 <head>
     <!-- Include necessary CSS and JS files -->
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #ecf0f5;
             color: #34495e;
-            margin: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            position: fixed;
         }
  
         #page-container {
             background-color: #fff;
-            width: 21cm;
-            max-width: 100%;
+        
+            width: 350px;
             margin: 20px;
-            padding: 20px;
+            padding-right:20px;
+            padding-top: 0px;
+            padding-left: 35px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
+            box-sizing: content-box;
+            margin-left: 450px;
         }
  
         h1 {
@@ -47,7 +50,7 @@
         select {
             width: calc(100% - 20px);
             padding: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             border: 1px solid #bdc3c7;
             border-radius: 4px;
             box-sizing: border-box;
@@ -57,11 +60,13 @@
             background-color: #3498db;
             color: #fff;
             padding: 10px 15px;
+            margin-bottom: 10px;
+            margin-left: 135px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             display: block;
-            margin: 0 auto;
+           
             font-size: 16px;
         }
  
@@ -96,9 +101,22 @@
             </div>
  
             <div>
-                <label for="empmobile">Phone:</label>
-                <input type="text" id="empmobile" name="empmobile" th:value="${user.empmobile}">
-            </div>
+    <label for="empmobile">Phone:</label>
+    <select id="countryCode" name="countryCode">
+        <option value="+1">+1 (United States)</option>
+        <option value="+49">+49 (Germany)</option>
+        <option value="+61">+61 (Australia)</option>
+        <option value="+91">+91 (India)</option>
+        <option value="+33">+33 (France)</option>
+        <option value="+43">+43 (Austria)</option>
+        <option value="+353">+353 (Ireland)</option>
+        <option value="+44">+44 (United Kingdom)</option>
+        <option value="+971">+971 (UAE)</option>
+        <option value="+34">+34 (Spain)</option>
+    </select>
+    <input type="text" id="empmobile" name="empmobile" maxlength="13" pattern="\d{13}" placeholder="Enter mobile number">
+</div>
+
             <div>
                 <label for="availability">Availability:</label>
                 <select name="availability" id="availability">

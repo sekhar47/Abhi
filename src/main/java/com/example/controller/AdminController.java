@@ -3,6 +3,7 @@ package com.example.controller;
 
 import com.example.dto.EmployeeDetailsDTO;
 import com.example.entity.EmployeeSkill;
+import com.example.entity.User;
 import com.example.service.EmployeeService;
 import com.opencsv.CSVWriter;
 
@@ -40,6 +41,9 @@ import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.List;
 
 @Controller
@@ -105,6 +109,21 @@ public class AdminController {
             return ResponseEntity.ok().body(Map.of("success", true));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(Map.of("success", false, "error", e.getMessage()));
+        }
+    }
+    
+    @GetMapping("/get-user-privilege")
+    public ResponseEntity<String> getUserPrivilege(HttpServletRequest request) {
+        // Assume User object is stored in the session after authentication
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (user != null) {
+            String privilage = user.getPrivilage();
+            System.out.println("privilage" + privilage);
+            return ResponseEntity.ok(privilage);
+        } else {
+            // Handle case where user is not authenticated
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
         }
     }
 

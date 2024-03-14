@@ -3,7 +3,7 @@
 
 <head>
   <!-- Template Main CSS File -->
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -83,7 +83,7 @@
                 <img src="/img/TalenTrack.png" alt="logo" width="200">
                 <!-- <h2 class="animate__animated animate__fadeInDown">TalenTrack</h2> -->
                 <p class="animate__animated animate__fadeInUp">View Employee Details</p>
-                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                <a th:href="@{/admin/admin/employees?data=ADMIN}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@
                 <img src="/img/TalenTrack.png" alt="logo" width="200">
                 <!-- <h2 class="animate__animated animate__fadeInDown">TalenTrack</h2> -->
                 <p class="animate__animated animate__fadeInUp">Generate Reports</p>
-                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                <a th:href="@{/employeeSkills?data=ADMIN}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@
               <div class="container">
                 <img src="/img/TalenTrack.png" alt="logo" width="200">
                 <p class="animate__animated animate__fadeInUp">Manage Skills</p>
-                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                <a th:href="@{/viewSkillsPage?data=ADMIN}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
               </div>
             </div>
           </div>
@@ -201,7 +201,7 @@
             <div class="about-move">
               <div class="services-details">
                 <div class="single-services">
-                  <a class="services-icon" th:href="@{/admin/admin/employees}">
+<a class="services-icon" th:href="@{/admin/admin/employees?data=ADMIN}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
   <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5"/>
 </svg>
@@ -219,7 +219,7 @@
             <div class="about-move">
               <div class="services-details">
                 <div class="single-services">
-                  <a class="services-icon"th:href="@{/viewSkillsPage}">
+					<a class="services-icon" th:href="@{/viewSkillsPage?data=ADMIN}">
                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-front" viewBox="0 0 16 16">
   <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2zm5 10v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2v5a2 2 0 0 1-2 2z"/>
 </svg>
@@ -238,7 +238,7 @@
             <div class=" about-move">
               <div class="services-details">
                 <div class="single-services">
-                  <a class="services-icon" th:href="@{/admin/report/search}">
+<a class="services-icon" th:href="@{/admin/report/search?data=ADMIN}">
                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
   <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
 </svg>
@@ -262,7 +262,7 @@
             <div class="about-move">
               <div class="services-details">
                 <div class="single-services">
-                  <a class="services-icon" th:href="@{/employeeSkills}">
+				<a class="services-icon" th:href="@{/employeeSkills?data=ADMIN}">
                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
   <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
   <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
@@ -279,24 +279,24 @@
           </div>
 
 
-       <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="about-move">
-              <div class="services-details">
-                <div class="single-services">
-                  <a class="services-icon" th:href="@{/manage-employees}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-kanban" viewBox="0 0 16 16">
-  <path d="M13.5 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm-11-1a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-  <path d="M6.5 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1zm-4 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1zm8 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1z"/>
-</svg>
-                  </a>
-                  <h4>Manage Employees</h4>
-                 
-                </div>
-              </div>
-              <!-- end about-details -->
+<!--<div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="about-move">
+        <div class="services-details">
+            <div class="single-services">
+                <a class="services-icon" th:href="@{/manage-employees}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-kanban" viewBox="0 0 16 16">
+                        <path d="M13.5 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm-11-1a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                        <path d="M6.5 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1zm-4 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1zm8 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1z"/>
+                    </svg>
+                </a>
+                <h4>Manage Employees</h4>
             </div>
-          </div>
+        </div>
+         end about-details 
+    </div>
+</div>
 
+-->
 
     <!-- ======= Portfolio Section ======= -->
     <div id="portfolio" class="portfolio-area area-padding fix">
@@ -323,13 +323,16 @@
         <div class="row awesome-project-content portfolio-container">
 
           <!-- portfolio-item start -->
+          <!-- portfolio-item start -->
           <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-app portfolio-item">
             <div class="single-awesome-project">
               <div class="awesome-img">
                 <a href="#"><img src="https://th.bing.com/th/id/OIP.4dQkxLm-cAndV-9OfVjjQwAAAA?rs=1&pid=ImgDetMain"/></a>
                 <div class="add-actions text-center">
                   <div class="project-dec">
-                    <a  href="/admin/searchEmployees?empid=&skillname=HTML&domain=&subdomain=&proficiency=">
+<!--					  th:href="@{/admin/admin/employees?data=SADMIN}" 
+-->                    <a th:href="@{/admin/searchEmployees(empid='', skillname='HTML', domain='', subdomain='', proficiency='', data='ADMIN')}">
+
                       <h4>HTML</h4>
                       <span>Front End</span>
                     </a>
@@ -347,7 +350,7 @@
                 <a href="#"><img src="https://www.teamdevelopmentforsitecore.com/-/media/TDS/Images/Features/cloud.png?h=401&w=640&la=en&hash=5CC957C0691353F38FB2606BA57338E3A25AA5A2" alt="" /></a>
                 <div class="add-actions text-center">
                   <div class="project-dec">
-                    <a href="/admin/searchEmployees?empid=&skillname=AZURE&domain=&subdomain=&proficiency=">
+<a href="/admin/searchEmployees?empid=&skillname=AZURE&domain=&subdomain=&proficiency=&data=ADMIN">
                       <h4>Azure</h4>
                       <span>Cloud</span>
                     </a>
@@ -366,7 +369,7 @@
 </a>
                 <div class="add-actions text-center">
                   <div class="project-dec">
-                    <a  href="/admin/searchEmployees?empid=&skillname=JAVA&domain=&subdomain=&proficiency=">
+<a href="/admin/searchEmployees?empid=&skillname=JAVA&domain=&subdomain=&proficiency=&data=ADMIN">
                       <h4>Java</h4>
                       <span>Back End</span>
                     </a>
@@ -384,7 +387,7 @@
                 <a href="#"><img src="https://th.bing.com/th/id/R.85f966ae0555f3900f5db62f9a59610d?rik=CcQz9zEicB5fqQ&riu=http%3a%2f%2fwww.digitalspace.co.uk%2fwp-content%2fuploads%2f2021%2f06%2flogo-google-cloud.png&ehk=v%2bSdmP%2bMCgmoD8aBsMs%2bXCJG96e8uT7LviINoe3F7q8%3d&risl=&pid=ImgRaw&r=0" alt="" /></a>
                 <div class="add-actions text-center">
                   <div class="project-dec">
-                    <a href="/admin/searchEmployees?empid=&skillname=GCP&domain=&subdomain=&proficiency=">
+<a href="/admin/searchEmployees?empid=&skillname=GCP&domain=&subdomain=&proficiency=&data=ADMIN">
                       <h4>GCP</h4>
                       <span>Cloud</span>
                     </a>
@@ -402,7 +405,7 @@
                 <a href="#"><img src="https://th.bing.com/th/id/R.f462ea39ee7a688a9c46faa2d230907a?rik=gdVJOgOfym%2fv6Q&riu=http%3a%2f%2fwww.goldenapplewebdesign.com%2fwp-content%2fuploads%2f2011%2f07%2fcss3.jpg&ehk=XJePj%2bDwQf5elnrVTK24c%2fQvyJoDOV7RiybsjKJ7rso%3d&risl=&pid=ImgRaw&r=0" alt="" /></a>
                 <div class="add-actions text-center text-center">
                   <div class="project-dec">
-                    <a href="/admin/searchEmployees?empid=&skillname=CSS&domain=&subdomain=&proficiency=">
+<a href="/admin/searchEmployees?empid=&skillname=CSS&domain=&subdomain=&proficiency=&data=ADMIN">
                       <h4>CSS</h4>
                       <span>Front End</span>
                     </a>
@@ -420,7 +423,7 @@
                 <a href="#"><img src="https://www.igel.com/wp-content/uploads/2020/06/aws@2x.png" alt="" /></a>
                 <div class="add-actions text-center">
                   <div class="project-dec">
-                    <a href="/admin/searchEmployees?empid=&skillname=AWS&domain=&subdomain=&proficiency=">
+<a href="/admin/searchEmployees?empid=&skillname=AWS&domain=&subdomain=&proficiency=&data=ADMIN">
                       <h4>AWS</h4>
                       <span>Cloud</span>
                     </a>
@@ -448,8 +451,8 @@
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs=12">
             <div class="suscribe-text text-center">
               <h3>Welcome to our Torry Harris Business Solutions</h3>
-              <a class="sus-btn" href="#">Get A quote</a>
-            </div>
+<!--              <a class="sus-btn" href="#">Get A quote</a>
+-->            </div>
           </div>
         </div>
       </div>
@@ -477,7 +480,7 @@
 </svg></a>
                     </li>
                     <li>
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                      <a href="https://twitter.com/torryharris"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
   <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
 </svg></a>
                     </li>
@@ -515,7 +518,7 @@
           <div class="col-md-4">
             <div class="footer-content">
               <div class="footer-head">
-                <h4>Instagram</h4>
+                 <img src="/img/techimage2.jpg" alt="Tech Image" width="200" height="150">
                 <div class="flicker-img">
                   <a href="#"><img src="assets/img/portfolio/1.jpg" alt=""></a>
                   <a href="#"><img src="assets/img/portfolio/2.jpg" alt=""></a>
@@ -568,6 +571,8 @@
 
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>
+
+
 
 </body>
 

@@ -62,51 +62,10 @@ public class ReportController {
         }
     }
 
-
-	/*
-	 * @GetMapping("/download")
-	 * 
-	 * @PreAuthorize("hasRole('ADMIN')") public void downloadReport(
-	 * 
-	 * @RequestParam(required = false) String empid, HttpServletResponse response )
-	 * throws IOException, DocumentException { // Get the data for the specified
-	 * empid List<EmployeeDetailsDTO> employees =
-	 * employeeService.findByEmpid(empid);
-	 * 
-	 * // Set response headers response.setContentType("application/pdf");
-	 * response.setHeader("Content-Disposition",
-	 * "attachment; filename=employee_report.pdf");
-	 * 
-	 * // Create PDF document Document document = new Document();
-	 * PdfWriter.getInstance(document, response.getOutputStream()); document.open();
-	 * 
-	 * // Add title Paragraph title = new Paragraph("Employee Report");
-	 * title.setAlignment(Paragraph.ALIGN_CENTER); document.add(title);
-	 * document.add(new Paragraph("\n"));
-	 * 
-	 * // Create PDF table PdfPTable table = new PdfPTable(11); // 11 columns for
-	 * each field
-	 * 
-	 * // Add table headers table.addCell("EmpID"); table.addCell("Name");
-	 * table.addCell("Email"); table.addCell("Mobile"); table.addCell("Skill Name");
-	 * table.addCell("Domain"); table.addCell("Subdomain");
-	 * table.addCell("Proficiency"); table.addCell("Availability");
-	 * table.addCell("Reviewed"); table.addCell("Training Days");
-	 * 
-	 * // Add data rows for (EmployeeDetailsDTO employee : employees) {
-	 * table.addCell(employee.getEmpid()); table.addCell(employee.getName());
-	 * table.addCell(employee.getEmpemail());
-	 * table.addCell(employee.getEmpmobile());
-	 * table.addCell(employee.getSkillname()); table.addCell(employee.getDomain());
-	 * table.addCell(employee.getSubdomain());
-	 * table.addCell(employee.getProficiency());
-	 * table.addCell(employee.isAvailability() ? "Yes" : "No");
-	 * table.addCell(employee.isReviewed() ? "Yes" : "No");
-	 * table.addCell(String.valueOf(employee.getTrainingdays())); }
-	 * 
-	 * // Add table to document document.add(table);
-	 * 
-	 * // Close document document.close(); }
-	 */
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @GetMapping("/generate")
+//    public String showSearchPage1() {
+//        return "search";
+//    }
 
 }

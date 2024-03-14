@@ -7,13 +7,19 @@
 
     <title>Search Page</title>
     <link rel="stylesheet" type="text/css" href="path/to/search-styles.css">
-    <style>
-        body {
+     <style>
+       body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f8f8; /* Set a light background color */
+            background-color: rgb(255, 255, 255); /* Set a light background color */
+            background-image: url();
             color: #333; /* Set default text color */
+            background-repeat: no-repeat;
             text-align: center;
-            margin: 50px;
+         position: fixed;
+            margin: 100px;
+            margin-top: 200px;
+            margin-right: 500px;
+            margin-left: 30px;
         }
 
         h2 {
@@ -45,35 +51,99 @@
             cursor: pointer;
         }
 
-        button:hover {
+        .search1:hover {
             background-color: #2980b9; /* Change background color on hover */
+        }
+
+        /* Adjusted positioning for the back button */
+        .back-button {
+            background-color: rgb(27, 118, 148);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: fixed; /* Position the button relative to the viewport */
+            top: 10px; /* 10px from the top */
+            left: 10px; /* 10px from the left */
         }
 
         .content {
             margin-top: 30px;
             color: #555; /* Set text color for content */
         }
+        #sd {
+    width: 60%;
+    margin-left: 800px;
+    margin-top: -380px;
+}
+
     </style>
 </head>
 <body>
-    <!-- Your existing button -->
-    <button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/admin-page'">Back</button>
-
     <h2>Search Employee</h2>
-    <form th:action="@{/admin/report/generate}" method="post">
+<form th:action="@{/admin/report/generate(data=${param.data})}" method="post">
         <label for="empid">Enter EmpID:</label>
         <input type="text" id="empid" name="empid">
-        <button type="submit">Search</button>
+        <input type="hidden" name="data" th:value="${param.data}">
+        <button class="search1" type="submit">Search</button>
     </form>
 
     <div class="content">
-        <!-- Thymeleaf conditional check to display error message -->
         <div th:if="${error}" style="color: red;">
             <p th:text="${error}"></p>
         </div>
         
         <p>This module allows you to search for employee information based on their EmpID.</p>
         <p>Enter the EmpID in the field above and click the Search button to retrieve the information.</p>
+        <img src="https://img.freepik.com/free-vector/curiosity-search-concept-illustration_114360-11031.jpg?t=st=1710130106~exp=1710133706~hmac=5a4688deed57ac085fe886af97a39fd75b27d62bb66fc0ca6dd6ebdd9c775e8a&w=740" id="sd">
     </div>
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    // Function to add back button based on data parameter
+    function addBackButton(dataParam) {
+        // Remove existing button if any
+        $('.back-button').remove();
+
+        // Add back button based on dataParam
+        if (dataParam === 'ADMIN') {
+            $('body').append('<button class="back-button">Back to Admin Page</button>');
+            $('.back-button').on('click', function() {
+                window.location.href = '/admin-page';
+            });
+        } else if (dataParam === 'SADMIN') {
+            $('body').append('<button class="back-button">Back to Super Admin Page</button>');
+            $('.back-button').on('click', function() {
+                window.location.href = '/superadmin-page';
+            });
+        } else if (dataParam === 'EMPID_NOT_FOUND') {
+            // Redirect to the search page with the appropriate data parameter
+            $('body').append('<button class="back-button">Back to Search Page</button>');
+            $('.back-button').on('click', function() {
+                var searchPageUrl = '/admin/report/search?data=' + dataParam;
+                window.location.href = searchPageUrl;
+            });
+        }
+    }
+
+    // Call addBackButton function when document is ready
+    $(document).ready(function() {
+        // Extract data parameter from URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var dataParam = urlParams.get('data');
+        
+        // Check if there's an error message present
+        var errorMessage = $('.content').find('div').text().trim();
+        if (errorMessage !== "") {
+            // Employee ID not found, add back button for search page with EMPID_NOT_FOUND parameter
+            addBackButton('EMPID_NOT_FOUND');
+        } else {
+            // Otherwise, proceed with the regular dataParam
+            addBackButton(dataParam);
+        }
+    });
+</script>
 </body>
 </html>

@@ -81,43 +81,4 @@ public class ProfileController {
     }
     
 
-//    @PostMapping("/updatePicture")
-//    public ResponseEntity<String> updateProfilePicture(@RequestParam("file") MultipartFile file) {
-//        // Logic to handle profile picture update
-//        if (file.isEmpty()) {
-//            return new ResponseEntity<>("File is required", HttpStatus.BAD_REQUEST);
-//        }
-//
-//        try {
-//            // Normalize the file name
-//            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//
-//            // Save the file to the upload directory
-//            String uploadDir = "path/to/your/upload/directory";
-//            File uploadPath = new File(uploadDir);
-//            if (!uploadPath.exists()) {
-//                uploadPath.mkdirs();
-//            }
-//
-//            try (FileOutputStream fos = new FileOutputStream(uploadDir + File.separator + fileName)) {
-//                fos.write(file.getBytes());
-//            }
-//
-//            return new ResponseEntity<>("Profile picture updated successfully", HttpStatus.OK);
-//        } catch (IOException ex) {
-//            return new ResponseEntity<>("Failed to update profile picture", HttpStatus.INTERNAL_SERVER_ERROR);
-//        }}
-//
-//    private User getCurrentUser() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-//            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//            String empid = userDetails.getUsername(); // Assuming the username is the empid
-//            return userRepository.findByEmpid(empid); // Assuming you have access to userRepository
-//        } else {
-//            // Handle case when user is not authenticated or UserDetails is not available
-//            return null;
-//        }
-//    }
-
 }

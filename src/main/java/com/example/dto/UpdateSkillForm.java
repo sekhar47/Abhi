@@ -41,11 +41,5 @@ public class UpdateSkillForm {
 		// TODO Auto-generated constructor stub
 	}
 
-    
-    
-    // getters and setters
-
-    // constructors
-	
 }
 

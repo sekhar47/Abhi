@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.util.List;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ import com.example.service.SkillService;
 @Controller
 public class SkillController {
 
+	@Autowired
+    private HttpSession session;
+	
     @Autowired
     private SkillService service;
 
@@ -53,10 +57,15 @@ public class SkillController {
     @PostMapping("/saveSkill")
     public String saveSkill(@ModelAttribute Skills skill, RedirectAttributes redirectAttributes) {
         // Check if subdomain is null or empty
+    	 String dataParam = (String) session.getAttribute("data");
+         if (dataParam == null) {
+             dataParam = ""; // Set default value if 'data' parameter is not set
+         }
+        
     	 if (skill.getSubdomain() == null) {
     	        // Redirect back to the skill creation page with an error message
     	        redirectAttributes.addFlashAttribute("errorMessage", "Please select a subdomain.");
-    	        return "redirect:/createSkillPage";
+    	        return "redirect:/viewSkillsPage?data=" + dataParam;
     	    }
         // Check if a skill with the same name, domain, and subdomain already exists
         Skills existingSkill = service.getSkillByNameAndDomainAndSubdomain(skill.getSkillname(), skill.getDomain(), skill.getSubdomain());
@@ -96,7 +105,7 @@ public class SkillController {
             }
         }
 
-        return "redirect:/viewSkillsPage";
+        return "redirect:/viewSkillsPage?data=" + dataParam;
     }
 
 
@@ -121,8 +130,14 @@ public class SkillController {
         // Save the new domain
         service.saveDomain(domain);
 
-        return "redirect:/viewSkillsPage";
+        String dataParam = (String) session.getAttribute("data");
+        if (dataParam == null) {
+            dataParam = ""; // Set default value if 'data' parameter is not set
+        }
+        // Save the subdomain
+        return "redirect:/viewSkillsPage?data=" + dataParam;
     }
+    
     
     @PostMapping("/saveSubdomain")
     public String saveSubdomain(@RequestParam("domain") String domain, @RequestParam("subdomain") String subdomain, Model model) {
@@ -134,20 +149,23 @@ public class SkillController {
             model.addAttribute("domains", domains);
             return "createSubdomain";
         }
-
+        String dataParam = (String) session.getAttribute("data");
+        if (dataParam == null) {
+            dataParam = ""; // Set default value if 'data' parameter is not set
+        }
         // Save the subdomain
         service.saveSubdomain(domain, subdomain);
-        return "redirect:/viewSkillsPage";
+        return "redirect:/viewSkillsPage?data=" + dataParam;
     }
 
 //    delete skill
     @PostMapping("/deleteSkills")
-    public String deleteSkills(@RequestParam("skillsToDelete") List<Integer> skillIds) {
+    public String deleteSkills(@RequestParam("skillsToDelete") List<Integer> skillIds, @RequestParam(name = "data", required = false, defaultValue = "") String dataParam) {
         // Iterate through the list of skillIds and delete each skill
         for (Integer skillId : skillIds) {
             service.deleteSkill(skillId);
         }
-        return "redirect:/viewSkillsPage";
+        return "redirect:/viewSkillsPage?data=" + dataParam;
     }
     
 //    update skill
@@ -158,7 +176,11 @@ public class SkillController {
             existingSkill.setSkillname(skillName);
             service.saveSkill(existingSkill);
         }
-        return "redirect:/viewSkillsPage";
+        String dataParam = (String) session.getAttribute("data");
+        if (dataParam == null) {
+            dataParam = ""; // Set default value if 'data' parameter is not set
+        }
+        return "redirect:/viewSkillsPage?data=" + dataParam;
     }
 
     
@@ -177,7 +199,11 @@ public class SkillController {
             service.updateDomain(existingDomain, updatedDomain);
         }
         
-        return "redirect:/viewSkillsPage";
+        String dataParam = (String) session.getAttribute("data");
+        if (dataParam == null) {
+            dataParam = ""; // Set default value if 'data' parameter is not set
+        }
+        return "redirect:/viewSkillsPage?data=" + dataParam;
     }
 
     
@@ -195,7 +221,12 @@ public class SkillController {
             service.updateSubdomain(domain, existingSubdomain, updatedSubdomain);
         }
         
-        return "redirect:/viewSkillsPage";
+        String dataParam = (String) session.getAttribute("data");
+        if (dataParam == null) {
+            dataParam = ""; // Set default value if 'data' parameter is not set
+        }
+        // Save the subdomain
+        return "redirect:/viewSkillsPage?data=" + dataParam;
     }
 
     
@@ -221,7 +252,11 @@ public class SkillController {
                                   @RequestParam("oldSkillName") String oldSkillName,
                                   @RequestParam("newSkillName") String newSkillName) {
     	service.updateSkillName(domain, subdomain, oldSkillName, newSkillName);
-        return "redirect:/viewSkillsPage";
+    	 String dataParam = (String) session.getAttribute("data");
+         if (dataParam == null) {
+             dataParam = ""; // Set default value if 'data' parameter is not set
+         }
+         return "redirect:/viewSkillsPage?data=" + dataParam;
     }
     
 

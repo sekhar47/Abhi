@@ -33,8 +33,15 @@ public class EmployeeSkillValidateController {
     @PostMapping("/reviewSkill")
     public String reviewSkill(@RequestParam String empid, @RequestParam Integer skillid, @RequestParam boolean approved) {
         employeeSkillValidateService.reviewEmployeeSkill(empid, skillid, approved);
-        return "redirect:/employeeSkills"; // Redirect back to the page displaying employee skills
+        // Get the value of the 'data' parameter from the session
+        String dataParam = (String) session.getAttribute("data");
+        if (dataParam == null) {
+            dataParam = ""; // Set default value if 'data' parameter is not set
+        }
+        // Redirect back to the page displaying employee skills with 'data' parameter appended
+        return "redirect:/employeeSkills?data=" + dataParam;
     }
+
 
     @GetMapping("/notificationCount")
     public ResponseEntity<Integer> getNotificationCount() {

@@ -93,7 +93,7 @@
             color: #721c24;
             animation: slideInDown 1s ease-out forwards;
             z-index: 9999;
-            display: none; /* Initially hide the error message */
+        /* Initially hide the error message */
         }
 
         @keyframes slideInDown {
@@ -165,8 +165,8 @@
         </form>
 
         <!-- Display error message -->
-        <div id="errorMessage" class="message" th:if="${errorMessage}">
-            <span th:text="${errorMessage}"></span>
+        <div id="exception" class="message" th:if="${exception}">
+            <span th:text="${exception}"></span>
         </div>
 
         <!-- Forgot Password and Register buttons -->

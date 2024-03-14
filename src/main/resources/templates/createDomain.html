@@ -92,7 +92,7 @@
     </style>
 </head>
 <body>
-	<button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/viewSkillsPage'">Back</button>
+	<button style="background-color: rgb(27, 118, 148); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; position: absolute; top: 20px; left: 20px;"  onclick="goBack()">Back</button>
     <div class="container">
         <h2>Create/Update Domain</h2>
 
@@ -155,5 +155,42 @@
             }
         }
     </script>
+   <script>
+    // Function to get the dataParam from the current URL
+    function getDataParam() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('data');
+    }
+
+    // Function to handle redirection with the same dataParam
+    function redirectWithDataParam(page) {
+        const dataParam = getDataParam();
+        const redirectUrl = page + "?data=" + dataParam;
+        window.location.href = redirectUrl;
+    }
+
+    // Toggle between create and update forms
+    function toggleForm() {
+        var createForm = document.getElementById('createDomainForm');
+        var updateForm = document.getElementById('updateDomainForm');
+
+        if (createForm.style.display === 'block') {
+            createForm.style.display = 'none';
+            updateForm.style.display = 'block';
+            document.getElementById('toggleText').innerText = 'Create Domain';
+        } else {
+            createForm.style.display = 'block';
+            updateForm.style.display = 'none';
+            document.getElementById('toggleText').innerText = 'Update Domain';
+        }
+    }
+
+    // Function to handle redirection to the previous page
+    function goBack() {
+        redirectWithDataParam('/viewSkillsPage');
+    }
+</script>
+
+</script>
 </body>
 </html>

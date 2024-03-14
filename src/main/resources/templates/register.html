@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
- 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +14,11 @@
     <style>
         body {
             /* background-color: #f8f9fa; */
-            background-image: url("css/img/NIr8Y2.jpg");
+            background-repeat: no-repeat;
+            position: fixed;
+            background-image: url("https://img.freepik.com/premium-vector/man-working-vector-white-background_918882-40.jpg?w=740");
         }
- 
+
   .eye-icon {
             cursor: pointer;
             position: absolute;
@@ -26,28 +28,31 @@
         }
         .container {
             max-width: 400px;
-            margin: 100px auto;
+            margin: 80px 850px;
             background-color: #ffffff;
-            padding: 20px;
+            padding: 8px;
+            padding-right: 25px;
+            padding-left: 25px;
             border-radius: 12px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
         }
- 
-        h2 {
+
+        h3 {
             text-align: center;
             color: #007bff;
             margin-bottom: 20px;
         }
- 
+
         .form-group {
             margin-bottom: 20px;
         }
- 
+
         label {
             font-weight: bold;
             color: #343a40;
         }
- 
+
         input {
             width: 100%;
             padding: 10px;
@@ -57,27 +62,27 @@
             border-radius: 4px;
             transition: border-color 0.3s;
         }
- 
+
         input[type="submit"] {
             background-color: #007bff;
             color: #fff;
             cursor: pointer;
         }
- 
+
         input:focus {
             border-color: #007bff;
         }
- 
+
         .register-link {
             text-align: center;
             margin-top: 20px;
         }
- 
+
         .register-link a {
             color: #28a745;
             text-decoration: none;
         }
- 
+
         /* Adjusted styles for consistent input box formatting */
         .form-control {
             width: 100%;
@@ -86,14 +91,14 @@
             border-radius: 4px;
             transition: border-color 0.3s;
         }
- 
+
         .btn-primary {
             background-color: #007bff;
             color: #fff;
             cursor: pointer;
             width: 100%;
         }
- 
+
         /* Styles for error message */
         .error-message {
             background-color: #f8d7da;
@@ -109,7 +114,7 @@
             width: 30%; /* Reduce width */
             animation: fadeOut 3s forwards; /* Fade out animation */
         }
- 
+
         @keyframes fadeOut {
             30% {
                 opacity: 1;
@@ -132,31 +137,30 @@
     </style>
     </style>
 </head>
- 
+
 <body>
     <!-- Error message outside the main container -->
     <div th:if="${message != null}" class="error-message">
         [[${message}]]
     </div>
- 
     <div class="container">
-        <h2>Sign up</h2>
+        <h3>Sign up</h3>
         <form th:action="@{/registration}" method="post" role="form" th:object="${user}" onsubmit="return validatePassword()">
             <div class="form-group">
                 <label for="empid">Employee ID</label>
                 <input th:field="*{empid}" type="text" id="empid" name="empid" class="form-control" required>
             </div>
- 
+
             <div class="form-group">
                 <label for="name">Fullname</label>
                 <input th:field="*{name}" type="text" id="name" name="name" class="form-control" required>
             </div>
- 
+
             <div class="form-group">
                 <label for="empemail">Email</label>
                 <input th:field="*{empemail}" type="text" id="empemail" name="empemail" class="form-control" required>
             </div>
- 
+
            <div class="form-group">
                 <label for="password">Password</label>
                 <div class="input-group">
@@ -176,7 +180,7 @@
             <p>Already have an account? <a href="/login">Login here</a></p>
         </div>
     </div>
- 
+
     <!-- Include Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -198,7 +202,7 @@
             }, 5000);
         });
     </script>
-    
+
     <script>
         // Function to toggle the password visibility
         function togglePassword() {
@@ -241,5 +245,5 @@ function validatePassword() {
 </script>
 
 </body>
- 
+
 </html>

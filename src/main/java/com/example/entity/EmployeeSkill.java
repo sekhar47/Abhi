@@ -17,11 +17,7 @@ import lombok.Data;
 
 
 @Data
-/*
- * @AllArgsConstructor
- * 
- * @NoArgsConstructor
- */
+
 @Transactional
 @Table(name = "EmployeeSkill")
 @Entity

@@ -2,6 +2,7 @@ package com.example.entity;
 
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -12,16 +13,11 @@ import com.example.service.EmployeeService;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 //@AllArgsConstructor
@@ -50,11 +46,8 @@ public class User implements EmployeeService {
 	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime tokenCreationDate;
 	
-    private String imageName;
 
-	
-	 @Lob
-	 private byte[] profilePicture;
+//    private String rportingmanager;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<EmployeeSkill> employeeSkills;
@@ -63,17 +56,62 @@ public class User implements EmployeeService {
 	private Set<ConfirmationToken> confirmationToken;
 
 	
-    private boolean isEnabled;
+    private boolean enable;
+ 
+    private boolean isAccountNonLocked;
+    
+    public boolean isAccountNonLocked() {
+		return isAccountNonLocked;
+	}
 
+	public void setAccountNonLocked(boolean isAccountNonLocked) {
+		this.isAccountNonLocked = isAccountNonLocked;
+	}
+
+	public int getFailedAttempt() {
+		return failedAttempt;
+	}
+
+	public void setFailedAttempt(int failedAttempt) {
+		this.failedAttempt = failedAttempt;
+	}
+
+	public Date getLockTime() {
+		return lockTime;
+	}
+
+	public void setLockTime(Date lockTime) {
+		this.lockTime = lockTime;
+	}
+
+	private int failedAttempt;
+    
+    private Date lockTime;
     
     
 	
-	public boolean isEnabled() {
-		return isEnabled;
+//	public String getRportingmanager() {
+//		return rportingmanager;
+//	}
+//
+//	public void setRportingmanager(String rportingmanager) {
+//		this.rportingmanager = rportingmanager;
+//	}
+
+	public Set<ConfirmationToken> getConfirmationToken() {
+		return confirmationToken;
 	}
 
-	public void setEnabled(boolean isEnabled) {
-		this.isEnabled = isEnabled;
+	public void setConfirmationToken(Set<ConfirmationToken> confirmationToken) {
+		this.confirmationToken = confirmationToken;
+	}
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
 	}
 
 	public Set<EmployeeSkill> getEmployeeSkills() {
@@ -163,27 +201,6 @@ public class User implements EmployeeService {
 	}
 
 	
-	
-	
-	
-	public byte[] getProfilePicture() {
-		return profilePicture;
-	}
-
-	public void setProfilePicture(byte[] profilePicture) {
-		this.profilePicture = profilePicture;
-	}
-	
-	
-	
-
-	public String getImageName() {
-		return imageName;
-	}
-
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
 
 	public User(String empid, String name, String empemail, String password, String empmobile, Boolean availability,
 			String privilage, String designation, String token, LocalDateTime tokenCreationDate,
@@ -251,10 +268,6 @@ public class User implements EmployeeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-
-
-	
+		
 
 }

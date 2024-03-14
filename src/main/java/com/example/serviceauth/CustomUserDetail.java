@@ -3,8 +3,10 @@ package com.example.serviceauth;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import com.example.entity.User;
 
@@ -15,11 +17,17 @@ public class CustomUserDetail implements UserDetails {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private User user;
 	
-	public CustomUserDetail(User user) {
-		this.user = user;
-	}
+
+	   private User user;
+	    
+	    public CustomUserDetail(User user) {
+	    	super();
+	        this.user = user;
+	    }
+
+
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -27,6 +35,14 @@ public class CustomUserDetail implements UserDetails {
 		return List.of(() -> user.getPrivilage());
 	}
 	
+	public User getUser() {
+		System.out.println("User is " + user);
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public String getName() {
 		return user.getName();
 	}
@@ -66,7 +82,7 @@ public class CustomUserDetail implements UserDetails {
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return true;
+		return user.isAccountNonLocked();
 	}
 
 	@Override
@@ -78,7 +94,7 @@ public class CustomUserDetail implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return user.isEnable();
 	}
 
 }

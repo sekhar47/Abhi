@@ -26,14 +26,4 @@ public class NotificationController {
         return "notificationPage";
     }
 
-//    @GetMapping("/notificationCount")
-//    public ResponseEntity<Map<String, Integer>> getNotificationCount() {
-//        Map<String, Integer> response = new HashMap<>();
-//        List<String> notifications = employeeSkillValidateService.getStoredNotifications();
-//        int count = notifications != null ? notifications.size() : 0;
-//        response.put("count", count);
-//        return ResponseEntity.ok(response);
-//    }
-    
- 
 }

@@ -104,17 +104,7 @@ public class UserProfileServiceImpl implements UserProfileService {
             // Handle user not found
         }
     }
-	
-//    @Override
-//    @Transactional
-//    public void saveOrUpdateProfilePicture(User user, MultipartFile file) throws IOException {
-//        if (user != null && file != null && !file.isEmpty()) {
-//            user.setImageName(file.getOriginalFilename());
-//            user.setProfilePicture(file.getBytes());
-//            userRepository.save(user);
-//        }
-//    }
-  
+
 }
 
 

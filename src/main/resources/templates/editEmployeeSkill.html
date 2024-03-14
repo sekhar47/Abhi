@@ -98,12 +98,12 @@
     <select id="proficiency" name="proficiency">
         <option value="Awareness" th:selected="${employeeSkill.proficiency == 'Awareness'}">Awareness</option>
         <option value="Novice" th:selected="${employeeSkill.proficiency == 'Novice'}">Novice</option>
-        <option value="Proficiency" th:selected="${employeeSkill.proficiency == 'Proficiency'}">Professional</option>
+        <option value="Professional" th:selected="${employeeSkill.proficiency == 'Professional'}">Professional</option>
         <option value="Expert" th:selected="${employeeSkill.proficiency == 'Expert'}">Expert</option>
     </select>
     <br>
     
-    <label for="exp">Experience:</label>
+    <label for="exp">Training Days:</label>
     <input type="text" id="trainingdays" name="trainingdays" th:value="${employeeSkill.trainingdays}">
     <br>
     

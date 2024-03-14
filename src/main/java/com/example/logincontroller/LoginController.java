@@ -21,6 +21,8 @@ import com.example.entity.User;
 import com.example.serviceauth.UserService;
 import com.example.skillvalidate.EmployeeSkillValidateService;
 
+import jakarta.servlet.http.HttpSession;
+
 
 
 @Controller
@@ -41,11 +43,23 @@ public class LoginController {
 	public String getRegistrationPage(@ModelAttribute("user") UserDto userDto) {
 		return "landing";
 	}
+//	
+//	@GetMapping("/login")
+//	public String login(@RequestParam(name = "error", required = false) String error, Model model) {
+//	    if (error != null) {
+//	        model.addAttribute("exception", "Incorrect username or password. Please try again.");
+//	    }
+//	    return "login";
+//	}
 	
 	@GetMapping("/login")
-	public String login(@RequestParam(name = "error", required = false) String error, Model model) {
+	public String login(Model model, HttpSession session) {
+	    // Retrieve error message from session attribute
+	    String error = (String) session.getAttribute("loginError");
 	    if (error != null) {
-	        model.addAttribute("errorMessage", "Incorrect username or password. Please try again.");
+	        model.addAttribute("exception", error);
+	        // Clear error message from session
+//	        session.removeAttribute("loginError");
 	    }
 	    return "login";
 	}
@@ -67,5 +81,11 @@ public class LoginController {
 		return "admin";
 	}
 
+	@GetMapping("superadmin-page")
+	public String superadminPage (Model model, Principal principal) {
+		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+		model.addAttribute("user", userDetails);
+		return "superadmin";
+	}
 
 }
